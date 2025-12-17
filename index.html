@@ -38,18 +38,27 @@
       pointer-events:none;
     }
 
-    /* NAVBAR */
+    /* NAVBAR (3-column grid so center is truly centered) */
     .nav{
       position:fixed;top:0;left:0;right:0;height:64px;
-      display:flex;align-items:center;justify-content:space-between;
       padding:0 28px;
       background:rgba(5,5,5,.78);
       border-bottom:1px solid rgba(255,255,255,.08);
       backdrop-filter: blur(10px);
       z-index:50;
+
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      column-gap:16px;
     }
 
-    .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.2px}
+    .brand{
+      justify-self:start;
+      display:flex;align-items:center;gap:12px;
+      font-weight:700;letter-spacing:.2px;
+      min-width:0;
+    }
     .brand-badge{
       width:28px;height:28px;border-radius:999px;
       border:1px solid var(--border);
@@ -59,26 +68,28 @@
     .brand small{display:block;font-weight:400;color:var(--muted2);margin-top:2px;font-size:12px}
 
     .nav-center{
-      position:absolute;
-      left:50%;
-      transform:translateX(-50%);
+      justify-self:center;
       display:flex;
       align-items:center;
     }
 
-    /* Bubble nav (dark gray container w/ lighter outline like chat box) */
-   .bubble-nav{
-  width: 33vw;
-     display:flex;
-  justivy-content: center;
-     gap:18px;
-  align-items:center;
-  padding:10px;
-  border-radius:999px;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.20);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    /* Bubble nav (container behind pills) */
+    .bubble-nav{
+      display:flex;
+      justify-content:center; /* (you had a typo: justivy-content) */
+      align-items:center;
+      gap:22px;
+
+      width:33vw;          /* about 1/3 of screen */
+      max-width:560px;
+      min-width:360px;
+
+      padding:14px 18px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.20);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
     }
 
     /* Each word gets its own rounded box */
@@ -96,21 +107,22 @@
       min-width:94px;
       text-align:center;
     }
-
     .bubble-item:hover{
       color:#fff;
       background:rgba(255,255,255,.10);
       border-color:rgba(255,255,255,.22);
       transform: translateY(-1px);
     }
-
     .bubble-item.active{
       color:#fff;
       background:rgba(255,255,255,.14);
       border-color:rgba(255,255,255,.25);
     }
 
-    .nav-right{display:flex;gap:10px;align-items:center}
+    .nav-right{
+      justify-self:end;
+      display:flex;gap:10px;align-items:center
+    }
     .iconbtn{
       height:36px;min-width:42px;padding:0 12px;
       border:1px solid var(--border);
@@ -281,9 +293,7 @@
     <section class="hero">
       <div class="hero-inner">
         <h1 class="title">Welcome to oqe8.cc</h1>
-        <p class="subtitle">
-         
-        </p>
+        <p class="subtitle"></p>
 
         <div class="searchRow">
           <div class="search" role="search">
