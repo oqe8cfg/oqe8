@@ -12,223 +12,383 @@
   <style>
     :root{
       --bg:#050505;
-      --white:#fff;
+      --border:rgba(255,255,255,.10);
       --muted:rgba(255,255,255,.65);
       --muted2:rgba(255,255,255,.45);
-      --border:rgba(255,255,255,.12);
+      --white:#fff;
+
+      /* glow panel colors */
+      --glow1: rgba(140,120,255,.55);
+      --glow2: rgba(90,160,255,.45);
+      --glow3: rgba(255,255,255,.12);
+      --panel: rgba(18, 18, 18, .72);
+      --panelBorder: rgba(255,255,255,.14);
     }
 
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
     body{background:var(--bg);color:var(--white);min-height:100vh;overflow-x:hidden}
-    a{text-decoration:none;color:inherit}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
 
-    /* ===== FILM GRAIN ===== */
-    .grain-bg{
-      position:fixed;
-      inset:0;
-      background:
-        radial-gradient(circle at center, rgba(0,0,0,.35), rgba(0,0,0,.95)),
-        url("grain.png");
-      background-size:cover, 320px 320px;
-      background-repeat:no-repeat, repeat;
-      opacity:.18;
-      z-index:-2;
-      pointer-events:none;
-    }
-
-    /* ===== NAVBAR ===== */
+    /* NAVBAR (3-column grid so center is truly centered) */
     .nav{
-      position:fixed;
-      inset:0 0 auto 0;
-      height:64px;
+      position:fixed;top:0;left:0;right:0;height:64px;
       padding:0 28px;
       background:rgba(5,5,5,.78);
-      backdrop-filter: blur(10px);
       border-bottom:1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
       z-index:50;
 
       display:grid;
-      grid-template-columns:1fr auto 1fr;
+      grid-template-columns: 1fr auto 1fr;
       align-items:center;
+      column-gap:16px;
     }
 
     .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:700;
+      justify-self:start;
+      display:flex;align-items:center;gap:12px;
+      font-weight:700;letter-spacing:.2px;
+      min-width:0;
     }
-
     .brand-badge{
-      width:28px;height:28px;
-      border-radius:999px;
+      width:28px;height:28px;border-radius:999px;
       border:1px solid var(--border);
-      display:grid;
-      place-items:center;
+      display:grid;place-items:center;
+      background:rgba(255,255,255,.03);
     }
-
-    .brand small{
-      display:block;
-      font-weight:400;
-      font-size:12px;
-      color:var(--muted2);
-    }
+    .brand small{display:block;font-weight:400;color:var(--muted2);margin-top:2px;font-size:12px}
 
     .nav-center{
+      justify-self:center;
       display:flex;
-      justify-content:center;
+      align-items:center;
     }
 
-    /* ===== BUBBLE NAV ===== */
+    /* Bubble nav (container behind pills) */
     .bubble-nav{
       display:flex;
       justify-content:center;
       align-items:center;
       gap:22px;
 
-      width:33vw;
-      min-width:360px;
+      width:33vw;          /* about 1/3 of screen */
       max-width:560px;
+      min-width:360px;
 
-      padding:14px 20px;
+      padding:14px 18px;
       border-radius:999px;
-      background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.20);
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
       backdrop-filter: blur(10px);
-      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
     }
 
     .bubble-item{
-      min-width:94px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       padding:10px 16px;
-      text-align:center;
       border-radius:999px;
       font-size:13px;
       color:rgba(255,255,255,.85);
       border:1px solid rgba(255,255,255,.12);
       background:rgba(0,0,0,.35);
-      transition:.2s;
+      transition:.2s ease;
+      min-width:94px;
+      text-align:center;
     }
-
     .bubble-item:hover{
+      color:#fff;
       background:rgba(255,255,255,.10);
       border-color:rgba(255,255,255,.22);
-      transform:translateY(-1px);
+      transform: translateY(-1px);
+    }
+    .bubble-item.active{
+      color:#fff;
+      background:rgba(255,255,255,.14);
+      border-color:rgba(255,255,255,.25);
     }
 
     .nav-right{
-      display:flex;
-      justify-content:flex-end;
-      gap:10px;
+      justify-self:end;
+      display:flex;gap:10px;align-items:center
     }
-
     .iconbtn{
-      height:36px;
-      min-width:42px;
-      border-radius:10px;
+      height:36px;min-width:42px;padding:0 12px;
       border:1px solid var(--border);
       background:rgba(255,255,255,.02);
-      color:#fff;
+      color:var(--white);
+      border-radius:10px;
       cursor:pointer;
+      transition:.2s;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .iconbtn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)}
+    .chip{
+      font-size:12px;color:var(--muted);
+      border:1px solid rgba(255,255,255,.10);
+      padding:6px 10px;border-radius:999px;
+      background:rgba(255,255,255,.03);
     }
 
-    /* ===== HERO ===== */
+    /* PAGE LAYOUT */
     .wrap{padding-top:64px}
-
     .hero{
       min-height:92vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
+      display:flex;align-items:center;justify-content:center;
+      padding:70px 18px 40px;
       text-align:center;
-      padding:60px 18px;
     }
-
     .hero-inner{max-width:860px}
-
     .title{
-      font-size:54px;
-      margin-bottom:12px;
+      font-size:54px;line-height:1.05;
+      letter-spacing:-1px;
+      margin-bottom:14px;
     }
-
     .subtitle{
       color:var(--muted);
       max-width:720px;
       margin:0 auto 26px;
-      line-height:1.6;
+      line-height:1.65;
+      font-size:15px;
     }
 
-    /* ===== SEARCH ===== */
     .searchRow{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
+      display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+      margin:18px auto 18px;
     }
-
     .search{
-      width:min(560px,92vw);
-      display:flex;
-      gap:10px;
+      width:min(560px, 92vw);
+      display:flex;align-items:center;gap:10px;
       padding:12px 14px;
-      border-radius:12px;
-      border:1px solid var(--border);
+      border:1px solid rgba(255,255,255,.12);
       background:rgba(0,0,0,.35);
+      border-radius:12px;
+      backdrop-filter: blur(8px);
     }
-
+    .search svg{opacity:.7}
     .search input{
       width:100%;
-      background:transparent;
-      border:0;
-      outline:0;
-      color:#fff;
+      background:transparent;border:0;outline:0;
+      color:var(--white);
+      font-size:14px;
     }
-
     .primary{
       height:46px;
       padding:0 18px;
       border-radius:12px;
       border:1px solid rgba(255,255,255,.18);
       background:rgba(255,255,255,.06);
-      color:#fff;
+      color:var(--white);
+      cursor:pointer;
+      transition:.2s;
+      display:flex;align-items:center;gap:10px;
+    }
+    .primary:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.26)}
+
+    /* ===== Social glow bar (matches your image vibe) ===== */
+    .social-bar{
+      width:min(520px, 92vw);
+      margin:16px auto 0;
+      padding:12px 16px;
+
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+      position:relative;
+      overflow:visible;
+    }
+
+    /* Glowy gradient behind icons */
+    .social-bar::before{
+      content:"";
+      position:absolute;
+      inset:-18px;
+      border-radius:18px;
+      background:
+        radial-gradient(circle at 20% 50%, var(--glow1), transparent 55%),
+        radial-gradient(circle at 60% 45%, var(--glow2), transparent 55%),
+        radial-gradient(circle at 85% 60%, var(--glow1), transparent 60%);
+      filter: blur(16px);
+      opacity:.55;
+      z-index:-1;
+      pointer-events:none;
+    }
+
+    .socials{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+    }
+
+    .social{
+      width:44px;height:44px;
+      display:grid;place-items:center;
+      border-radius:12px;
+      position:relative;
+
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.12);
+      transition:.2s ease;
+    }
+
+    .social svg{width:26px;height:26px;opacity:1}
+    .social:hover{
+      transform: translateY(-1px);
+      background:rgba(255,255,255,.08);
+      border-color:rgba(255,255,255,.22);
+      box-shadow:
+        0 0 18px rgba(140,120,255,.35),
+        0 0 30px rgba(90,160,255,.22);
+    }
+
+    /* Discord dropdown (2 options on hover) */
+    .social.dd{
       cursor:pointer;
     }
 
-    .primary:hover{
-      background:rgba(255,255,255,.12);
+    .dd-menu{
+      position:absolute;
+      top:52px;
+      right:0;
+      min-width:220px;
+      padding:10px;
+      border-radius:14px;
+
+      background:rgba(10,10,10,.82);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 45px rgba(0,0,0,.55);
+
+      display:none;
+      z-index:100;
     }
 
-    @media(max-width:820px){
+    .dd:hover .dd-menu,
+    .dd:focus-within .dd-menu{
+      display:block;
+    }
+
+    .dd-menu a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+
+      padding:10px 10px;
+      border-radius:12px;
+      color:rgba(255,255,255,.92);
+      border:1px solid transparent;
+      background:rgba(255,255,255,.04);
+      margin-bottom:8px;
+      transition:.2s;
+      font-size:13px;
+    }
+
+    .dd-menu a:last-child{margin-bottom:0}
+
+    .dd-menu a:hover{
+      background:rgba(255,255,255,.08);
+      border-color:rgba(255,255,255,.16);
+      box-shadow: 0 0 22px rgba(140,120,255,.18);
+    }
+
+    .dd-menu .hint{
+      color:rgba(255,255,255,.55);
+      font-size:11px;
+    }
+
+    /* SECTION + CARDS */
+    .section{
+      padding:0 18px 80px;
+      display:flex;justify-content:center;
+    }
+    .grid{
+      width:min(980px, 100%);
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:18px;
+    }
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.35);
+      border-radius:16px;
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+      transition:.25s;
+      position:relative;
+    }
+    .card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.18);background:rgba(0,0,0,.42)}
+    .cardTop{
+      padding:18px 18px 14px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .cardTop h3{font-size:16px}
+    .tag{font-size:12px;color:var(--muted2);border:1px solid rgba(255,255,255,.10);padding:6px 10px;border-radius:999px}
+    .cardBody{padding:0 18px 16px;color:var(--muted);font-size:13px;line-height:1.55}
+    .thumb{
+      height:140px;
+      display:grid;place-items:center;
+      border-top:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+      background:radial-gradient(circle at 30% 20%, rgba(255,255,255,.10), transparent 55%),
+                 radial-gradient(circle at 70% 80%, rgba(255,255,255,.06), transparent 55%),
+                 rgba(255,255,255,.02);
+    }
+    .thumb span{
+      font-size:42px;font-weight:800;letter-spacing:-1px;
+      opacity:.9;
+    }
+    .cardBottom{
+      padding:14px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+    }
+    .price{font-size:13px;color:var(--white)}
+    .muted{color:var(--muted2);font-size:13px}
+    .linkbtn{
+      border:1px solid rgba(255,255,255,.14);
+      background:transparent;
+      color:var(--white);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      transition:.2s;
+      display:flex;align-items:center;gap:10px;
+    }
+    .linkbtn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22)}
+
+    @media (max-width: 820px){
+      .nav{padding:0 14px}
       .bubble-nav{display:none}
       .title{font-size:40px}
+      .grid{grid-template-columns:1fr}
+      .social-bar{width:min(520px, 92vw)}
     }
   </style>
 </head>
 
 <body>
-  <div class="grain-bg"></div>
-
   <header class="nav">
-    <div class="brand">
+    <a class="brand" href="#">
       <div class="brand-badge">⦿</div>
       <div>
         oqe8.cc
         <small>dark landing page</small>
       </div>
-    </div>
+    </a>
 
-    <nav class="nav-center">
-      <div class="bubble-nav">
-        <a class="bubble-item" href="#home">Home</a>
-        <a class="bubble-item" href="#products">Products</a>
-        <a class="bubble-item" href="#reviews">Reviews</a>
-      </div>
+    <nav class="nav-center bubble-nav">
+      <a class="bubble-item" href="#home">Home</a>
+      <a class="bubble-item" href="#products">Products</a>
+      <a class="bubble-item" href="#reviews">Reviews</a>
     </nav>
 
     <div class="nav-right">
-      <button class="iconbtn">☾</button>
-      <button class="iconbtn">≡</button>
+      <button class="iconbtn" title="Theme">☾</button>
+      <button class="iconbtn" title="Menu">≡</button>
     </div>
   </header>
 
@@ -236,16 +396,106 @@
     <section class="hero">
       <div class="hero-inner">
         <h1 class="title">Welcome to oqe8.cc</h1>
-        <p class="subtitle">Clean, dark UI with visible film grain.</p>
+        <p class="subtitle">Clean, dark UI with a glowing social bar.</p>
 
         <div class="searchRow">
-          <div class="search">
+          <div class="search" role="search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
             <input placeholder="Search products..." />
           </div>
-          <button class="primary">View Products →</button>
+
+          <button class="primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+            View Products →
+          </button>
         </div>
+
+        <!-- ===== Glowing social icons bar (YouTube, Roblox, TikTok, Discord dropdown) ===== -->
+        <div class="social-bar" aria-label="Social links">
+          <div class="socials">
+
+            <!-- YouTube -->
+            <a class="social" href="https://youtube.com/@YOURNAME" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.7 4.6 12 4.6 12 4.6s-5.7 0-7.5.5A3 3 0 0 0 2.4 7.2 31.6 31.6 0 0 0 2 12a31.6 31.6 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.8.5 7.5.5 7.5.5s5.7 0 7.5-.5a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 22 12a31.6 31.6 0 0 0-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"/>
+              </svg>
+            </a>
+
+            <!-- Roblox -->
+            <a class="social" href="https://www.roblox.com/users/USERID/profile" target="_blank" rel="noopener" aria-label="Roblox">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M3 7.5L16.5 3 21 16.5 7.5 21 3 7.5zm7.6 3.2l2.8-1 1 2.8-2.8 1-1-2.8z"/>
+              </svg>
+            </a>
+
+            <!-- TikTok -->
+            <a class="social" href="https://www.tiktok.com/@YOURNAME" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M14 3v10.2a4.6 4.6 0 1 1-4-4.6v2.6a2.2 2.2 0 1 0 1.6 2.1V3h2.4c.3 2.2 2.2 4 4.4 4.2V9a6.7 6.7 0 0 1-4.4-1.9V3H14z"/>
+              </svg>
+            </a>
+
+            <!-- Discord dropdown -->
+            <div class="social dd" tabindex="0" aria-label="Discord">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20 4.8A16 16 0 0 0 16 3.5l-.2.4a14 14 0 0 1 3.1 1.6 12.8 12.8 0 0 0-14 0A14 14 0 0 1 8 3.9l-.2-.4A16 16 0 0 0 4 4.8C2.2 7.5 1.7 10 2 12.4A16 16 0 0 0 7 20l1-1.4a10 10 0 0 1-1.6-.8l.4-.3a11 11 0 0 0 10.4 0l.4.3c-.5.3-1 .5-1.6.8l1 1.4a16 16 0 0 0 5-7.6c.3-2.4-.2-4.9-2-7.6zM9.2 14.3c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5zm5.6 0c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5z"/>
+              </svg>
+
+              <div class="dd-menu" role="menu" aria-label="Discord links">
+                <a href="https://discord.com/users/YOUR_USER_ID" target="_blank" rel="noopener">
+                  Personal Discord <span class="hint">profile</span>
+                </a>
+                <a href="https://discord.gg/YOURINVITE" target="_blank" rel="noopener">
+                  Discord Server <span class="hint">invite</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- ===== End social bar ===== -->
+
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="grid">
+        <article class="card">
+          <div class="cardTop">
+            <h3>Products</h3>
+            <span class="tag">Featured</span>
+          </div>
+          <div class="thumb"><span>PR</span></div>
+          <div class="cardBody">Show off your best products, tools, or whatever you sell/build.</div>
+          <div class="cardBottom">
+            <div>
+              <div class="price">3 items</div>
+              <div class="muted">Updated recently</div>
+            </div>
+            <button class="linkbtn">View Details →</button>
+          </div>
+        </article>
+
+        <article class="card" id="reviews">
+          <div class="cardTop">
+            <h3>Reviews</h3>
+            <span class="tag">Social</span>
+          </div>
+          <div class="thumb"><span>RV</span></div>
+          <div class="cardBody">Drop testimonials, screenshots, or quotes here for social proof.</div>
+          <div class="cardBottom">
+            <div>
+              <div class="price">4 posts</div>
+              <div class="muted">Add more</div>
+            </div>
+            <button class="linkbtn">View Details →</button>
+          </div>
+        </article>
       </div>
     </section>
   </main>
 </body>
 </html>
+
+
