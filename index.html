@@ -12,46 +12,39 @@
   <style>
     :root{
       --bg:#050505;
-      --border:rgba(255,255,255,.10);
+      --white:#fff;
       --muted:rgba(255,255,255,.65);
       --muted2:rgba(255,255,255,.45);
-      --white:#fff;
+      --border:rgba(255,255,255,.12);
     }
 
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
     body{background:var(--bg);color:var(--white);min-height:100vh;overflow-x:hidden}
-    a{color:inherit;text-decoration:none}
-    button,input{font:inherit}
+    a{text-decoration:none;color:inherit}
 
-    /* ensure content is above grain */
-    header, main { position:relative; z-index:1; }
-
-    /* FILM GRAIN BACKGROUND (VISIBLE) */
+    /* ===== FILM GRAIN ===== */
     .grain-bg{
       position:fixed;
       inset:0;
-      z-index:0;
-      pointer-events:none;
-
       background:
-        radial-gradient(circle at center, rgba(0,0,0,.35), rgba(0,0,0,.92)),
+        radial-gradient(circle at center, rgba(0,0,0,.35), rgba(0,0,0,.95)),
         url("grain.png");
-
-      background-size: cover, 180px 180px;
-      background-repeat: no-repeat, repeat;
-      background-blend-mode: normal, overlay;
-
-      opacity:1;
-      filter: contrast(150%) brightness(95%);
+      background-size:cover, 320px 320px;
+      background-repeat:no-repeat, repeat;
+      opacity:.18;
+      z-index:-2;
+      pointer-events:none;
     }
 
-    /* NAVBAR (true centered layout) */
+    /* ===== NAVBAR ===== */
     .nav{
-      position:fixed;top:0;left:0;right:0;height:64px;
+      position:fixed;
+      inset:0 0 auto 0;
+      height:64px;
       padding:0 28px;
       background:rgba(5,5,5,.78);
-      border-bottom:1px solid rgba(255,255,255,.08);
       backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.08);
       z-index:50;
 
       display:grid;
@@ -60,20 +53,33 @@
     }
 
     .brand{
-      justify-self:start;
-      display:flex;align-items:center;gap:12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
       font-weight:700;
     }
+
     .brand-badge{
-      width:28px;height:28px;border-radius:999px;
+      width:28px;height:28px;
+      border-radius:999px;
       border:1px solid var(--border);
-      display:grid;place-items:center;
-      background:rgba(255,255,255,.03);
+      display:grid;
+      place-items:center;
     }
-    .brand small{display:block;font-weight:400;color:var(--muted2);font-size:12px}
 
-    .nav-center{justify-self:center}
+    .brand small{
+      display:block;
+      font-weight:400;
+      font-size:12px;
+      color:var(--muted2);
+    }
 
+    .nav-center{
+      display:flex;
+      justify-content:center;
+    }
+
+    /* ===== BUBBLE NAV ===== */
     .bubble-nav{
       display:flex;
       justify-content:center;
@@ -81,10 +87,10 @@
       gap:22px;
 
       width:33vw;
-      max-width:560px;
       min-width:360px;
+      max-width:560px;
 
-      padding:14px 18px;
+      padding:14px 20px;
       border-radius:999px;
       background:rgba(255,255,255,.12);
       border:1px solid rgba(255,255,255,.20);
@@ -93,16 +99,17 @@
     }
 
     .bubble-item{
+      min-width:94px;
       padding:10px 16px;
+      text-align:center;
       border-radius:999px;
       font-size:13px;
       color:rgba(255,255,255,.85);
       border:1px solid rgba(255,255,255,.12);
       background:rgba(0,0,0,.35);
       transition:.2s;
-      min-width:94px;
-      text-align:center;
     }
+
     .bubble-item:hover{
       background:rgba(255,255,255,.10);
       border-color:rgba(255,255,255,.22);
@@ -110,32 +117,90 @@
     }
 
     .nav-right{
-      justify-self:end;
-      display:flex;gap:10px;align-items:center
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
     }
+
     .iconbtn{
-      height:36px;min-width:42px;
+      height:36px;
+      min-width:42px;
+      border-radius:10px;
       border:1px solid var(--border);
       background:rgba(255,255,255,.02);
-      color:var(--white);
-      border-radius:10px;
+      color:#fff;
       cursor:pointer;
     }
-    .iconbtn:hover{background:rgba(255,255,255,.08)}
 
-    /* PAGE */
+    /* ===== HERO ===== */
     .wrap{padding-top:64px}
+
     .hero{
       min-height:92vh;
-      display:flex;align-items:center;justify-content:center;
-      padding:70px 18px 40px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
       text-align:center;
+      padding:60px 18px;
     }
-    .title{font-size:54px;margin-bottom:14px}
-    .subtitle{color:var(--muted);max-width:720px;margin:0 auto 26px}
 
-    @media (max-width:820px){
-      .nav-center{display:none}
+    .hero-inner{max-width:860px}
+
+    .title{
+      font-size:54px;
+      margin-bottom:12px;
+    }
+
+    .subtitle{
+      color:var(--muted);
+      max-width:720px;
+      margin:0 auto 26px;
+      line-height:1.6;
+    }
+
+    /* ===== SEARCH ===== */
+    .searchRow{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .search{
+      width:min(560px,92vw);
+      display:flex;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.35);
+    }
+
+    .search input{
+      width:100%;
+      background:transparent;
+      border:0;
+      outline:0;
+      color:#fff;
+    }
+
+    .primary{
+      height:46px;
+      padding:0 18px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      cursor:pointer;
+    }
+
+    .primary:hover{
+      background:rgba(255,255,255,.12);
+    }
+
+    @media(max-width:820px){
+      .bubble-nav{display:none}
       .title{font-size:40px}
     }
   </style>
@@ -145,18 +210,20 @@
   <div class="grain-bg"></div>
 
   <header class="nav">
-    <a class="brand" href="#">
+    <div class="brand">
       <div class="brand-badge">⦿</div>
       <div>
         oqe8.cc
         <small>dark landing page</small>
       </div>
-    </a>
+    </div>
 
-    <nav class="nav-center bubble-nav">
-      <a class="bubble-item" href="#home">Home</a>
-      <a class="bubble-item" href="#products">Products</a>
-      <a class="bubble-item" href="#reviews">Reviews</a>
+    <nav class="nav-center">
+      <div class="bubble-nav">
+        <a class="bubble-item" href="#home">Home</a>
+        <a class="bubble-item" href="#products">Products</a>
+        <a class="bubble-item" href="#reviews">Reviews</a>
+      </div>
     </nav>
 
     <div class="nav-right">
@@ -165,11 +232,18 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="home">
     <section class="hero">
-      <div>
+      <div class="hero-inner">
         <h1 class="title">Welcome to oqe8.cc</h1>
         <p class="subtitle">Clean, dark UI with visible film grain.</p>
+
+        <div class="searchRow">
+          <div class="search">
+            <input placeholder="Search products..." />
+          </div>
+          <button class="primary">View Products →</button>
+        </div>
       </div>
     </section>
   </main>
