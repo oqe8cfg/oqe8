@@ -58,7 +58,13 @@
     }
     .brand small{display:block;font-weight:400;color:var(--muted2);margin-top:2px;font-size:12px}
 
-    .nav-center{display:flex;align-items:center}
+    .nav-center{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+    }
 
     /* Bubble nav (dark gray container w/ lighter outline like chat box) */
    .bubble-nav{
