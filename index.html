@@ -199,7 +199,20 @@
 
 <body>
 <canvas id="bg"></canvas>
+<div class="nebula"></div>
 
+<style>
+.nebula{
+  position:fixed;
+  inset:-20%;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(140,120,255,.18), transparent 45%),
+    radial-gradient(circle at 70% 60%, rgba(90,160,255,.12), transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.06), transparent 55%);
+  filter: blur(80px);
+  z-index:-2;
+}
+</style>
 <header class="nav">
   <a class="brand" href="#">
     <div class="brand-badge">⦿</div>
