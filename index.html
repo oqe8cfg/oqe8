@@ -17,9 +17,16 @@
       --muted2:rgba(255,255,255,.45);
       --white:#fff;
 
-      /* glow panel colors */
-      --glow1: rgba(140,120,255,.55);
-      --glow2: rgba(90,160,255,.45);
+      /* bubble nav container */
+      --bubble-bg: rgba(255,255,255,.10);
+      --bubble-border: rgba(255,255,255,.18);
+
+      /* pills */
+      --pill-bg: rgba(0,0,0,.35);
+      --pill-hover: rgba(255,255,255,.10);
+
+      /* social glow */
+      --glow: rgba(160,120,255,.45);
     }
 
     *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
@@ -56,54 +63,59 @@
     }
     .brand small{display:block;font-weight:400;color:var(--muted2);margin-top:2px;font-size:12px}
 
-    .nav-center{justify-self:center;display:flex;align-items:center}
+    .nav-center{
+      justify-self:center;
+      display:flex;
+      align-items:center;
+    }
 
-    /* Bubble nav (container behind pills) */
+    /* Bubble nav (dark gray container behind pills) */
     .bubble-nav{
       display:flex;
       justify-content:center;
       align-items:center;
-      gap:22px;
+      gap:26px;
 
-      width:33vw;
+      width:33vw;          /* ~1/3 of screen */
       max-width:560px;
       min-width:360px;
 
-      padding:14px 18px;
+      padding:14px 22px;
       border-radius:999px;
-      background:rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.18);
+      background:var(--bubble-bg);
+      border:1px solid var(--bubble-border);
       backdrop-filter: blur(10px);
       box-shadow: 0 10px 30px rgba(0,0,0,.35);
     }
 
+    /* Each word gets its own rounded box */
     .bubble-item{
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:10px 16px;
+      padding:10px 18px;
       border-radius:999px;
       font-size:13px;
-      color:rgba(255,255,255,.85);
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.35);
+      color:rgba(255,255,255,.88);
+      background:var(--pill-bg);
       transition:.2s ease;
-      min-width:94px;
+      min-width:98px;
       text-align:center;
     }
     .bubble-item:hover{
       color:#fff;
-      background:rgba(255,255,255,.10);
-      border-color:rgba(255,255,255,.22);
+      background:var(--pill-hover);
       transform: translateY(-1px);
     }
     .bubble-item.active{
       color:#fff;
       background:rgba(255,255,255,.14);
-      border-color:rgba(255,255,255,.25);
     }
 
-    .nav-right{justify-self:end;display:flex;gap:10px;align-items:center}
+    .nav-right{
+      justify-self:end;
+      display:flex;gap:10px;align-items:center
+    }
     .iconbtn{
       height:36px;min-width:42px;padding:0 12px;
       border:1px solid var(--border);
@@ -115,6 +127,12 @@
       display:flex;align-items:center;justify-content:center;
     }
     .iconbtn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)}
+    .chip{
+      font-size:12px;color:var(--muted);
+      border:1px solid rgba(255,255,255,.10);
+      padding:6px 10px;border-radius:999px;
+      background:rgba(255,255,255,.03);
+    }
 
     /* PAGE LAYOUT */
     .wrap{padding-top:64px}
@@ -133,14 +151,14 @@
     .subtitle{
       color:var(--muted);
       max-width:720px;
-      margin:0 auto 26px;
+      margin:0 auto 18px;
       line-height:1.65;
       font-size:15px;
     }
 
     .searchRow{
       display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
-      margin:18px auto 18px;
+      margin:18px auto 10px;
     }
     .search{
       width:min(560px, 92vw);
@@ -171,127 +189,147 @@
     }
     .primary:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.26)}
 
-    /* ===== Social glow bar ===== */
-    .social-bar{
-      width:min(520px, 92vw);
-      margin:16px auto 0;
-      padding:12px 16px;
-      border-radius:14px;
-      background:rgba(0,0,0,.22);
-      backdrop-filter: blur(10px);
-      position:relative;
-    }
-    .social-bar::before{
-      content:"";
-      position:absolute;
-      inset:-18px;
-      border-radius:18px;
-      background:
-        radial-gradient(circle at 20% 50%, var(--glow1), transparent 55%),
-        radial-gradient(circle at 60% 45%, var(--glow2), transparent 55%),
-        radial-gradient(circle at 85% 60%, var(--glow1), transparent 60%);
-      filter: blur(16px);
-      opacity:.60;
-      z-index:-1;
-      pointer-events:none;
-    }
-
+    /* SOCIAL ICONS under search */
     .socials{
       display:flex;
       justify-content:center;
       align-items:center;
-      gap:18px;
+      gap:14px;
+      margin:14px auto 0;
     }
-
-    /* ✅ Removed outlines: no border on the buttons */
     .social{
-      width:46px;height:46px;
-      display:grid;place-items:center;
-      border-radius:12px;
       position:relative;
-
-      background:rgba(255,255,255,.04);
-      border:none; /* removed outline */
+      width:52px;height:44px;
+      border-radius:14px;
+      background:rgba(255,255,255,.06);
+      border:0;                 /* remove outlines */
+      display:grid;
+      place-items:center;
       transition:.2s ease;
-      cursor:pointer;
-    }
-
-    .social svg{width:26px;height:26px;opacity:1}
-    .social:hover{
-      transform: translateY(-1px);
-      background:rgba(255,255,255,.08);
       box-shadow:
-        0 0 18px rgba(140,120,255,.35),
-        0 0 30px rgba(90,160,255,.22);
+        0 10px 26px rgba(0,0,0,.40),
+        0 0 0 rgba(0,0,0,0);
+    }
+    .social svg{
+      width:22px;height:22px;
+      fill:#fff;
+      opacity:.95;
+      transition:.2s ease;
+    }
+    .social:hover{
+      transform: translateY(-2px);
+      background:rgba(255,255,255,.10);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.45),
+        0 0 26px var(--glow);
+    }
+    .social:active{transform: translateY(0px) scale(.98)}
+    .social a{
+      position:absolute; inset:0;
+      border-radius:14px;
     }
 
-    /* Discord dropdown */
-    .dd{position:relative}
-    .dd-menu{
+    /* Discord hover menu */
+    .social.discord .menu{
       position:absolute;
-      top:54px;
-      right:0;
-      min-width:220px;
+      top:52px;
+      left:50%;
+      transform:translateX(-50%);
+      width:190px;
       padding:10px;
       border-radius:14px;
-
-      background:rgba(10,10,10,.82);
-      border:1px solid rgba(255,255,255,.14);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 18px 45px rgba(0,0,0,.55);
-
+      background:rgba(20,20,20,.92);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 40px rgba(0,0,0,.55);
       display:none;
-      z-index:100;
+      z-index:10;
     }
-    .dd:hover .dd-menu,
-    .dd:focus-within .dd-menu{display:block}
-
-    .dd-menu a{
+    .social.discord:hover .menu,
+    .social.discord:focus-within .menu{
+      display:block;
+    }
+    .menu a{
+      position:static;
       display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-
       padding:10px 10px;
       border-radius:12px;
-      color:rgba(255,255,255,.92);
-      border:1px solid transparent;
-      background:rgba(255,255,255,.04);
-      margin-bottom:8px;
-      transition:.2s;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      margin:8px 0 0;
       font-size:13px;
+      color:rgba(255,255,255,.92);
     }
-    .dd-menu a:last-child{margin-bottom:0}
-    .dd-menu a:hover{
-      background:rgba(255,255,255,.08);
-      border-color:rgba(255,255,255,.16);
-      box-shadow: 0 0 22px rgba(140,120,255,.18);
+    .menu a:first-child{margin-top:0}
+    .menu a:hover{
+      background:rgba(255,255,255,.10);
+      box-shadow: 0 0 22px rgba(120,160,255,.18);
     }
-    .dd-menu .hint{color:rgba(255,255,255,.55);font-size:11px}
 
     /* SECTION + CARDS */
-    .section{padding:0 18px 80px;display:flex;justify-content:center}
-    .grid{width:min(980px, 100%);display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:18px}
-    .card{border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.35);border-radius:16px;overflow:hidden;backdrop-filter: blur(10px);transition:.25s;position:relative}
+    .section{
+      padding:0 18px 80px;
+      display:flex;justify-content:center;
+    }
+    .grid{
+      width:min(980px, 100%);
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:18px;
+    }
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.35);
+      border-radius:16px;
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+      transition:.25s;
+      position:relative;
+    }
     .card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.18);background:rgba(0,0,0,.42)}
-    .cardTop{padding:18px 18px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .cardTop{
+      padding:18px 18px 14px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
     .cardTop h3{font-size:16px}
     .tag{font-size:12px;color:var(--muted2);border:1px solid rgba(255,255,255,.10);padding:6px 10px;border-radius:999px}
     .cardBody{padding:0 18px 16px;color:var(--muted);font-size:13px;line-height:1.55}
-    .thumb{height:140px;display:grid;place-items:center;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);background:radial-gradient(circle at 30% 20%, rgba(255,255,255,.10), transparent 55%),radial-gradient(circle at 70% 80%, rgba(255,255,255,.06), transparent 55%),rgba(255,255,255,.02)}
-    .thumb span{font-size:42px;font-weight:800;letter-spacing:-1px;opacity:.9}
-    .cardBottom{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .thumb{
+      height:140px;
+      display:grid;place-items:center;
+      border-top:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+      background:radial-gradient(circle at 30% 20%, rgba(255,255,255,.10), transparent 55%),
+                 radial-gradient(circle at 70% 80%, rgba(255,255,255,.06), transparent 55%),
+                 rgba(255,255,255,.02);
+    }
+    .thumb span{
+      font-size:42px;font-weight:800;letter-spacing:-1px;
+      opacity:.9;
+    }
+    .cardBottom{
+      padding:14px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+    }
     .price{font-size:13px;color:var(--white)}
     .muted{color:var(--muted2);font-size:13px}
-    .linkbtn{border:1px solid rgba(255,255,255,.14);background:transparent;color:var(--white);padding:10px 12px;border-radius:12px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:10px}
+    .linkbtn{
+      border:1px solid rgba(255,255,255,.14);
+      background:transparent;
+      color:var(--white);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      transition:.2s;
+      display:flex;align-items:center;gap:10px;
+    }
     .linkbtn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22)}
 
     @media (max-width: 820px){
       .nav{padding:0 14px}
-      .bubble-nav{display:none}
+      .nav-center{display:none}
       .title{font-size:40px}
       .grid{grid-template-columns:1fr}
-      .social-bar{width:min(520px, 92vw)}
     }
   </style>
 </head>
@@ -307,12 +345,13 @@
     </a>
 
     <nav class="nav-center bubble-nav">
-      <a class="bubble-item" href="#home">Home</a>
+      <a class="bubble-item active" href="#home">Home</a>
       <a class="bubble-item" href="#products">Products</a>
       <a class="bubble-item" href="#reviews">Reviews</a>
     </nav>
 
     <div class="nav-right">
+      <span class="chip">v1</span>
       <button class="iconbtn" title="Theme">☾</button>
       <button class="iconbtn" title="Menu">≡</button>
     </div>
@@ -322,7 +361,7 @@
     <section class="hero">
       <div class="hero-inner">
         <h1 class="title">Welcome to oqe8.cc</h1>
-        <p class="subtitle">Clean, dark UI with a glowing social bar.</p>
+        <p class="subtitle">Clean, dark UI. Add your socials below.</p>
 
         <div class="searchRow">
           <div class="search" role="search">
@@ -337,51 +376,53 @@
           </button>
         </div>
 
-        <!-- Social icons -->
-        <div class="social-bar" aria-label="Social links">
-          <div class="socials">
+        <!-- PUT THIS BELOW: </div> (the closing tag for .searchRow)
+             AND ABOVE: <p class="muted"> (or before the next element after searchRow) -->
+        <div class="socials" aria-label="Social links">
+          <!-- YouTube -->
+          <div class="social" title="YouTube">
+            <a href="https://youtube.com/@YOURHANDLE" target="_blank" rel="noopener"></a>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21.7 8.2a3 3 0 0 0-2.1-2.1C17.9 5.6 12 5.6 12 5.6s-5.9 0-7.6.5A3 3 0 0 0 2.3 8.2 31 31 0 0 0 2 12a31 31 0 0 0 .3 3.8 3 3 0 0 0 2.1 2.1c1.7.5 7.6.5 7.6.5s5.9 0 7.6-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 22 12a31 31 0 0 0-.3-3.8ZM10.2 14.8V9.2L15 12l-4.8 2.8Z"/>
+            </svg>
+          </div>
 
-            <!-- YouTube -->
-            <a class="social" href="https://youtube.com/@YOURNAME" target="_blank" rel="noopener" aria-label="YouTube">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.7 4.6 12 4.6 12 4.6s-5.7 0-7.5.5A3 3 0 0 0 2.4 7.2 31.6 31.6 0 0 0 2 12a31.6 31.6 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.8.5 7.5.5 7.5.5s5.7 0 7.5-.5a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 22 12a31.6 31.6 0 0 0-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"/>
-              </svg>
-            </a>
+          <!-- Roblox (tilted square w/ hole) -->
+          <div class="social" title="Roblox">
+            <a href="https://www.roblox.com/users/YOURID/profile" target="_blank" rel="noopener"></a>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8.1 2.9 21 8.1l-5.1 12.9L3 15.9 8.1 2.9Zm3.5 6.3 2.1.8-.8 2.1-2.1-.8.8-2.1Z"/>
+            </svg>
+          </div>
 
-            <!-- Roblox -->
-            <a class="social" href="https://www.roblox.com/users/USERID/profile" target="_blank" rel="noopener" aria-label="Roblox">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M3 7.5L16.5 3 21 16.5 7.5 21 3 7.5zm7.6 3.2l2.8-1 1 2.8-2.8 1-1-2.8z"/>
-              </svg>
-            </a>
+          <!-- TikTok (simple note mark) -->
+          <div class="social" title="TikTok">
+            <a href="https://www.tiktok.com/@YOURHANDLE" target="_blank" rel="noopener"></a>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 3v9.1a3.9 3.9 0 1 1-3-3.8V5.3c0-.6.5-1.1 1.1-1.1H14Zm6 6.2c-2.3-.2-4.1-1.1-5.3-2.6V3h1.1c.5 2.2 2.3 3.9 4.2 4.2v2Z"/>
+            </svg>
+          </div>
 
-            <!-- TikTok -->
-            <a class="social" href="https://www.tiktok.com/@YOURNAME" target="_blank" rel="noopener" aria-label="TikTok">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M14 3v10.2a4.6 4.6 0 1 1-4-4.6v2.6a2.2 2.2 0 1 0 1.6 2.1V3h2.4c.3 2.2 2.2 4 4.4 4.2V9a6.7 6.7 0 0 1-4.4-1.9V3H14z"/>
-              </svg>
-            </a>
+          <!-- Discord w/ hover menu (2 links) -->
+          <div class="social discord" title="Discord">
+            <a href="https://discord.com/users/YOUR_USER_ID" target="_blank" rel="noopener" aria-label="Discord profile"></a>
+            <!-- cleaner discord mark -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19.2 6.3c-1.4-1-2.9-1.5-2.9-1.5l-.4.5c1 .3 1.7.8 2.2 1.2-1.9-.9-3.8-1.1-5.1-1.1s-3.2.2-5.1 1.1c.5-.4 1.3-.9 2.2-1.2l-.4-.5s-1.5.5-2.9 1.5C4.8 9 4.5 12.6 5 16c1.6 1.2 3.2 1.5 3.2 1.5l.7-1.1c-1.2-.4-1.7-.9-1.7-.9.1.1.3.2.5.3 1.9 1 4 1.1 4.3 1.1h.1c.3 0 2.4-.1 4.3-1.1.2-.1.4-.2.5-.3 0 0-.5.5-1.7.9l.7 1.1S17.4 17.2 19 16c.6-3.4.2-7- - .8-9.7ZM9.6 13.4c-.6 0-1.1-.6-1.1-1.3s.5-1.3 1.1-1.3 1.1.6 1.1 1.3-.5 1.3-1.1 1.3Zm4.8 0c-.6 0-1.1-.6-1.1-1.3s.5-1.3 1.1-1.3 1.1.6 1.1 1.3-.5 1.3-1.1 1.3Z"/>
+            </svg>
 
-            <!-- Discord (fixed icon + dropdown) -->
-            <div class="social dd" tabindex="0" aria-label="Discord">
-              <!-- ✅ cleaner Discord mark (closer to the real silhouette) -->
-              <svg viewBox="0 0 256 199" fill="currentColor" aria-hidden="true">
-                <path d="M216.9 16.5A208.2 208.2 0 0 0 164 0l-6.2 12.7c19.5 5.3 38 13.6 55 24.6-23.3-10.9-52.9-20.3-84.8-20.3S66.5 26.4 43.2 37.3c17-11 35.5-19.3 55-24.6L92 0A208.2 208.2 0 0 0 39.1 16.5C13.7 54.8 6.7 92 8.7 128.9c34.6 25.5 68.1 41 100.7 50.1l13.1-21.7c-11.8-4.4-23-10.1-33.4-17 2.8-2 5.6-4.1 8.3-6.3 20.2 15 43.6 23.2 70.6 23.2s50.4-8.2 70.6-23.2c2.7 2.2 5.5 4.3 8.3 6.3-10.4 6.9-21.6 12.6-33.4 17l13.1 21.7c32.6-9.1 66.1-24.6 100.7-50.1 2.4-44.2-4.1-81.1-21.7-112.4ZM92.6 134.4c-12.4 0-22.6-11.3-22.6-25.2s10-25.2 22.6-25.2 22.6 11.3 22.6 25.2-10 25.2-22.6 25.2Zm70.8 0c-12.4 0-22.6-11.3-22.6-25.2s10-25.2 22.6-25.2 22.6 11.3 22.6 25.2-10.2 25.2-22.6 25.2Z"/>
-              </svg>
-
-              <div class="dd-menu" role="menu" aria-label="Discord links">
-                <a href="https://discord.com/users/YOUR_USER_ID" target="_blank" rel="noopener">
-                  Personal Discord <span class="hint">profile</span>
-                </a>
-                <a href="https://discord.gg/YOURINVITE" target="_blank" rel="noopener">
-                  Discord Server <span class="hint">invite</span>
-                </a>
-              </div>
+            <div class="menu" role="menu" aria-label="Discord links">
+              <a href="https://discord.com/users/YOUR_USER_ID" target="_blank" rel="noopener" role="menuitem">
+                Personal Discord
+              </a>
+              <a href="https://discord.gg/YOUR_INVITE" target="_blank" rel="noopener" role="menuitem">
+                Discord Server
+              </a>
             </div>
-
           </div>
         </div>
 
+        <p class="muted"></p>
       </div>
     </section>
 
