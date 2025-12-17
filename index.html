@@ -26,18 +26,17 @@
 
     /* Film grain background */
     .grain-bg{
-      position:fixed;
-      inset:0;
-      background:
-        radial-gradient(circle at center, rgba(0,0,0,.55), rgba(0,0,0,.95)),
-        url("grain.png");
-      background-size:cover;
-      background-repeat:repeat;
-      opacity:.18
-    ;
-      z-index:-2;
-      pointer-events:none;
-    }
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at center, rgba(0,0,0,.35), rgba(0,0,0,.90)),
+    url("grain.png");
+  background-size: cover, 320px 320px; /* grain tiles */
+  background-repeat: no-repeat, repeat;
+  opacity:.20;
+  z-index:-2;
+  pointer-events:none;
+}
 
     /* NAVBAR (3-column grid so center is truly centered) */
     .nav{
