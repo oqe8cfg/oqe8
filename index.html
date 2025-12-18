@@ -11,7 +11,6 @@
 
 <style>
 :root{
-  --bg:#050505;
   --white:#fff;
   --muted:rgba(255,255,255,.6);
 }
@@ -33,47 +32,44 @@ body{
 a{text-decoration:none;color:inherit}
 
 /* =========================
-   BACKGROUND (LOGO + COLOR)
+   BACKGROUND (FULL + LOGO)
    ========================= */
-.bg-logo{
+.bg{
   position:fixed;
   inset:0;
   z-index:-3;
   pointer-events:none;
 
-  /* FULL PAGE STRIPES + CENTER LOGO */
-  background:
-    url("oqe.png") center center no-repeat,
-    url("oqe.png") center center repeat;
-    
+  /* layer 1 = centered logo
+     layer 2 = full background */
+  background-image:
+    url("oqe.png"),
+    url("oqebg.png");
+
+  background-repeat:
+    no-repeat,
+    no-repeat;
+
+  background-position:
+    center,
+    center;
+
+  /* logo is bigger than before */
   background-size:
-    min(520px,70vmin), /* center logo size */
-    cover;             /* stripe texture fills page */
+    min(620px, 75vmin),
+    cover;
 }
 
-/* dark vignette so content pops */
-.bg-logo::after{
+/* subtle dark vignette for contrast */
+.bg::after{
   content:"";
   position:absolute;
   inset:0;
   background:radial-gradient(
     circle at center,
-    rgba(0,0,0,.35) 0%,
-    rgba(0,0,0,.65) 55%,
-    rgba(0,0,0,.9) 100%
-  );
-}
-
-/* dark vignette so content pops */
-.bg-logo::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(
-    circle at center,
-    rgba(0,0,0,.35) 0%,
-    rgba(0,0,0,.65) 55%,
-    rgba(0,0,0,.9) 100%
+    rgba(0,0,0,.25) 0%,
+    rgba(0,0,0,.55) 60%,
+    rgba(0,0,0,.8) 100%
   );
 }
 
@@ -306,7 +302,7 @@ a{text-decoration:none;color:inherit}
 <body>
 
 <!-- BACKGROUND -->
-<div class="bg-logo"></div>
+<div class="bg"></div>
 
 <header class="nav">
   <div class="brand">
@@ -330,7 +326,7 @@ a{text-decoration:none;color:inherit}
 <div class="hero-inner">
 
 <h1 class="title">Welcome to oqe8.cc</h1>
-<p class="subtitle">View the socials!.</p>
+<p class="subtitle">View the socials!</p>
 
 <div class="searchRow">
   <div class="search">
