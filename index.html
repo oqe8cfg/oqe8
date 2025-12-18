@@ -41,14 +41,27 @@ a{text-decoration:none;color:inherit}
   z-index:-3;
   pointer-events:none;
 
-  /* page color */
-  background-color:#c47bff;
+  /* FULL PAGE STRIPES + CENTER LOGO */
+  background:
+    url("oqe.png") center center no-repeat,
+    url("oqe.png") center center repeat;
+    
+  background-size:
+    min(520px,70vmin), /* center logo size */
+    cover;             /* stripe texture fills page */
+}
 
-  /* centered logo */
-  background-image:url("oqe.png");
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:min(520px,70vmin);
+/* dark vignette so content pops */
+.bg-logo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(
+    circle at center,
+    rgba(0,0,0,.35) 0%,
+    rgba(0,0,0,.65) 55%,
+    rgba(0,0,0,.9) 100%
+  );
 }
 
 /* dark vignette so content pops */
