@@ -16,6 +16,7 @@
   --muted:rgba(255,255,255,.6);
 }
 
+/* RESET */
 *{
   margin:0;
   padding:0;
@@ -24,7 +25,6 @@
 }
 
 body{
-  background:var(--bg);
   color:var(--white);
   min-height:100vh;
   overflow-x:hidden;
@@ -32,7 +32,41 @@ body{
 
 a{text-decoration:none;color:inherit}
 
-/* NAVBAR */
+/* =========================
+   BACKGROUND (LOGO + COLOR)
+   ========================= */
+.bg-logo{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  pointer-events:none;
+
+  /* page color */
+  background-color:#c47bff;
+
+  /* centered logo */
+  background-image:url("oqe.png");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:min(520px,70vmin);
+}
+
+/* dark vignette so content pops */
+.bg-logo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(
+    circle at center,
+    rgba(0,0,0,.35) 0%,
+    rgba(0,0,0,.65) 55%,
+    rgba(0,0,0,.9) 100%
+  );
+}
+
+/* =========================
+   NAVBAR
+   ========================= */
 .nav{
   position:fixed;
   top:0;left:0;right:0;
@@ -95,7 +129,6 @@ a{text-decoration:none;color:inherit}
   border-radius:999px;
   background:rgba(0,0,0,.35);
   font-size:13px;
-  border:0;
   transition:.2s;
 }
 
@@ -103,7 +136,9 @@ a{text-decoration:none;color:inherit}
   background:rgba(255,255,255,.1);
 }
 
-/* PAGE */
+/* =========================
+   PAGE
+   ========================= */
 .wrap{padding-top:64px}
 
 .hero{
@@ -164,7 +199,9 @@ a{text-decoration:none;color:inherit}
   cursor:pointer;
 }
 
-/* SOCIAL ICON STRIP */
+/* =========================
+   SOCIAL ICON STRIP
+   ========================= */
 .social-wrap{
   margin-top:22px;
   display:flex;
@@ -200,7 +237,6 @@ a{text-decoration:none;color:inherit}
   display:grid;
   place-items:center;
   background:rgba(255,255,255,.06);
-  border:0;
   transition:.2s;
 }
 
@@ -209,12 +245,6 @@ a{text-decoration:none;color:inherit}
   box-shadow:
     0 0 24px rgba(120,100,255,.4),
     0 0 32px rgba(70,160,255,.3);
-}
-
-.social-icon{
-  width:24px;
-  height:24px;
-  opacity:.95;
 }
 
 .social-img{
@@ -262,6 +292,9 @@ a{text-decoration:none;color:inherit}
 
 <body>
 
+<!-- BACKGROUND -->
+<div class="bg-logo"></div>
+
 <header class="nav">
   <div class="brand">
     <div class="brand-badge">⦿</div>
@@ -293,34 +326,29 @@ a{text-decoration:none;color:inherit}
   <button class="primary">View Products →</button>
 </div>
 
-<!-- SOCIAL ICONS -->
 <div class="social-wrap">
 <div class="social-bar">
 
-<!-- YouTube -->
 <a class="social-btn" href="https://www.youtube.com/@oqe8" target="_blank">
   <img src="youtube.png" class="social-img" alt="YouTube">
 </a>
 
-<!-- Roblox (IMAGE) -->
 <a class="social-btn" href="https://roblox.com" target="_blank">
-<img src="roblox.png" class="social-img" alt="Roblox">
+  <img src="roblox.png" class="social-img" alt="Roblox">
 </a>
 
-<!-- TikTok -->
 <a class="social-btn" href="https://tiktok.com/@YOURUSERNAME" target="_blank">
   <img src="tiktok.png" class="social-img" alt="TikTok">
 </a>
 
-<!-- Discord (IMAGE + MENU) -->
 <div class="discord-wrap">
-<a class="social-btn">
-<img src="discord.png" class="social-img" alt="Discord">
-</a>
-<div class="discord-menu">
-  <a href="https://discord.com/users/YOUR_ID" target="_blank">Personal Discord</a>
-  <a href="https://discord.gg/YOUR_SERVER" target="_blank">Discord Server</a>
-</div>
+  <a class="social-btn">
+    <img src="discord.png" class="social-img" alt="Discord">
+  </a>
+  <div class="discord-menu">
+    <a href="https://discord.com/users/YOUR_ID" target="_blank">Personal Discord</a>
+    <a href="https://discord.gg/YOUR_SERVER" target="_blank">Discord Server</a>
+  </div>
 </div>
 
 </div>
