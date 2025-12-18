@@ -91,7 +91,85 @@ a{text-decoration:none;color:inherit}
   box-shadow:0 20px 60px rgba(0,0,0,.55);
   border:1px solid rgba(255,255,255,.08);
 }
+/* Floating product cards (no grid) */
+.products{
+  margin-top:18px;
+  display:flex;
+  gap:22px;
+  justify-content:center;
+  align-items:stretch;
+  flex-wrap:wrap; /* stacks on mobile */
+}
 
+.pcard{
+  width: 320px;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(15,15,20,.62);
+  border:1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(14px);
+  box-shadow:0 18px 50px rgba(0,0,0,.55);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  text-align:left;
+}
+
+.pcard:hover{
+  transform: translateY(-6px);
+  background:rgba(15,15,20,.72);
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.65),
+    0 0 24px rgba(130,90,255,.18),
+    0 0 26px rgba(70,160,255,.12);
+}
+
+.pthumb{
+  height:140px;
+  border-radius:14px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(130,90,255,.35), transparent 55%),
+    radial-gradient(circle at 70% 80%, rgba(70,160,255,.25), transparent 55%),
+    rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  margin-bottom:14px;
+}
+
+.ptitle{
+  font-size:16px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.pdesc{
+  color:rgba(255,255,255,.65);
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:14px;
+}
+
+.prow{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.pprice{
+  font-size:13px;
+  color:rgba(255,255,255,.85);
+}
+
+.pbtn{
+  padding:10px 12px;
+  border-radius:12px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.10);
+  transition:.2s;
+}
+
+.pbtn:hover{
+  background:rgba(255,255,255,.14);
+  border-color:rgba(255,255,255,.18);
+}
 h1{
   font-size:38px;
   margin-bottom:12px;
@@ -122,11 +200,38 @@ p{
 <div class="bg"></div>
 
 <main class="page">
-  <div class="card">
-    <h1>Products</h1>
-    <p>This page is intentionally empty for now.</p>
+ <div class="card">
+  <h1>Products</h1>
+  <p>Two featured items — no grid, just floating cards.</p>
+
+  <div class="products">
+    <!-- Product 1 -->
+    <article class="pcard">
+      <div class="pthumb"></div>
+      <div class="ptitle">Product One</div>
+      <div class="pdesc">Short description goes here. Keep it 1–2 lines for a clean look.</div>
+      <div class="prow">
+        <div class="pprice">$—</div>
+        <a class="pbtn" href="#" target="_blank" rel="noopener">View →</a>
+      </div>
+    </article>
+
+    <!-- Product 2 -->
+    <article class="pcard">
+      <div class="pthumb"></div>
+      <div class="ptitle">Product Two</div>
+      <div class="pdesc">Another short description. You can link to a checkout, discord, or whatever.</div>
+      <div class="prow">
+        <div class="pprice">$—</div>
+        <a class="pbtn" href="#" target="_blank" rel="noopener">View →</a>
+      </div>
+    </article>
+  </div>
+
+  <div style="margin-top:24px">
     <a class="back" href="index.html">← Back to Home</a>
   </div>
+</div>
 </main>
 
 </body>
