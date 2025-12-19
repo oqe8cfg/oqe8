@@ -55,12 +55,12 @@ a{text-decoration:none;color:inherit;}
 .bubble-item{padding:10px 18px;border-radius:999px;background:rgba(0,0,0,.35);font-size:13px;transition:.2s;}
 .bubble-item:hover{background:rgba(255,255,255,.1);}
 
-/* BOTTOM BAR */
+/* BOTTOM BAR (NO BUBBLES) */
 .footer{
   position:fixed; left:0; right:0; bottom:0;
   height:58px;
   padding:0 18px;
-  background:rgba(5,5,5,.55); /* slightly transparent */
+  background:rgba(5,5,5,.55);
   border-top:1px solid rgba(255,255,255,.08);
   backdrop-filter: blur(10px);
   display:flex;
@@ -68,33 +68,31 @@ a{text-decoration:none;color:inherit;}
   justify-content:center;
   z-index:50;
 }
-.footer-nav{
+.footer-links{
   display:flex;
-  gap:14px;
-  padding:10px 14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
+  gap:26px;
+  align-items:center;
+  justify-content:center;
 }
-.footer-item{
-  padding:10px 14px;
-  border-radius:999px;
-  background:rgba(0,0,0,.30);
+.footer-link{
   font-size:12px;
+  color:rgba(255,255,255,.75);
   transition:.2s;
-  white-space:nowrap;
+  letter-spacing:.2px;
 }
-.footer-item:hover{
-  background:rgba(255,255,255,.10);
+.footer-link:hover{
+  color:rgba(255,255,255,1);
+  text-shadow:
+    0 0 18px rgba(130,90,255,.25),
+    0 0 18px rgba(70,160,255,.18);
 }
 
 /* PAGE */
 .wrap{
   padding-top:64px;
-  padding-bottom:58px; /* room for footer */
+  padding-bottom:58px;
 }
 .page{
-  /* allow some scrolling space */
   padding:44px 18px 80px;
 }
 .layout{
@@ -107,7 +105,7 @@ a{text-decoration:none;color:inherit;}
   align-items:flex-start;
 }
 
-/* LEFT INFO BOX (taller) */
+/* LEFT INFO BOX */
 .info{
   flex:1 1 560px;
   min-width:min(560px, 96vw);
@@ -162,14 +160,13 @@ a{text-decoration:none;color:inherit;}
 }
 .btn:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.18);}
 
-/* adds a little extra scroll space (what you asked for) */
 .scroll-space{height:120px;}
 
 @media(max-width:820px){
   .bubble-nav{display:none;}
-  .footer-nav{gap:10px; flex-wrap:wrap; justify-content:center;}
-  .footer{height:auto; padding:10px 12px;}
-  .wrap{padding-bottom:86px;}
+  .footer{height:auto; padding:12px 14px;}
+  .footer-links{gap:16px; flex-wrap:wrap;}
+  .wrap{padding-bottom:92px;}
   .info,.side{flex-basis:100%;min-width:0;}
   .info{min-height:0;}
   .scroll-space{height:80px;}
@@ -243,11 +240,11 @@ a{text-decoration:none;color:inherit;}
 </main>
 
 <footer class="footer">
-  <nav class="footer-nav">
-    <a class="footer-item" href="terms.html">Terms of Service</a>
-    <a class="footer-item" href="privacy.html">Privacy Policy</a>
-    <a class="footer-item" href="refund.html">Refund Policy</a>
-  </nav>
+  <div class="footer-links">
+    <a class="footer-link" href="terms.html">Terms of Service</a>
+    <a class="footer-link" href="privacy.html">Privacy Policy</a>
+    <a class="footer-link" href="refund.html">Refund Policy</a>
+  </div>
 </footer>
 
 </body>
