@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -14,7 +15,6 @@
 body{color:var(--white);min-height:100vh;overflow-x:hidden;}
 a{text-decoration:none;color:inherit;}
 
-/* BACKGROUND (blurred) */
 .bg{
   position:fixed; inset:0; z-index:-3; pointer-events:none;
   background-image:url("oqe.png"), url("oqebg.png");
@@ -29,7 +29,6 @@ a{text-decoration:none;color:inherit;}
   background:radial-gradient(circle at center, rgba(0,0,0,.25) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.8) 100%);
 }
 
-/* NAVBAR */
 .nav{
   position:fixed; top:0;left:0;right:0;
   height:64px; padding:0 28px;
@@ -54,7 +53,6 @@ a{text-decoration:none;color:inherit;}
 .bubble-item{padding:10px 18px;border-radius:999px;background:rgba(0,0,0,.35);font-size:13px;transition:.2s;}
 .bubble-item:hover{background:rgba(255,255,255,.1);}
 
-/* PAGE */
 .wrap{padding-top:64px;}
 .page{
   min-height:calc(100vh - 64px);
@@ -70,11 +68,12 @@ a{text-decoration:none;color:inherit;}
   flex-wrap:wrap;
 }
 
-/* Big left info box */
+/* LEFT INFO BOX — MADE TALLER */
 .info{
   flex:1 1 560px;
   min-width:min(560px, 96vw);
   padding:22px;
+  padding-bottom:60px; /* ⬅ ~20% taller */
   border-radius:18px;
   background:rgba(15,15,20,.62);
   border:1px solid rgba(255,255,255,.10);
@@ -83,7 +82,6 @@ a{text-decoration:none;color:inherit;}
   text-align:left;
 }
 
-/* Right box */
 .side{
   flex:0 1 360px;
   min-width:min(360px, 96vw);
@@ -126,8 +124,7 @@ a{text-decoration:none;color:inherit;}
 
 @media(max-width:820px){
   .bubble-nav{display:none;}
-  .info{min-width:0;flex-basis:100%;}
-  .side{flex-basis:100%;}
+  .info,.side{flex-basis:100%;min-width:0;}
 }
 </style>
 </head>
@@ -148,51 +145,49 @@ a{text-decoration:none;color:inherit;}
       <a class="bubble-item" href="index.html#reviews">Reviews</a>
     </nav>
   </div>
-
   <div></div>
 </header>
 
 <main class="wrap">
-  <section class="page">
-    <div class="layout">
-      <div class="info">
-        <div class="h1">Product One</div>
-        <div class="sub">Put your product information here (features, details, requirements, etc.).</div>
+<section class="page">
+<div class="layout">
 
-        <div class="line"></div>
+<div class="info">
+  <div class="h1">Product One</div>
+  <div class="sub">Put your product information here (features, details, requirements, etc.).</div>
 
-        <div style="font-weight:700;margin-bottom:10px;">What you get</div>
-        <ul class="ul">
-          <li>Feature / benefit #1</li>
-          <li>Feature / benefit #2</li>
-          <li>Feature / benefit #3</li>
-        </ul>
+  <div class="line"></div>
 
-        <div class="line"></div>
+  <div style="font-weight:700;margin-bottom:10px;">What you get</div>
+  <ul class="ul">
+    <li>Feature / benefit #1</li>
+    <li>Feature / benefit #2</li>
+    <li>Feature / benefit #3</li>
+  </ul>
 
-        <div style="font-weight:700;margin-bottom:10px;">Notes</div>
-        <div class="sub" style="margin-bottom:0;">
-          Don’t put keys or private delivery info in the website code. Use your checkout platform for delivery.
-        </div>
-      </div>
+  <div class="line"></div>
 
-      <aside class="side">
-        <div class="thumb"></div>
-        <div style="font-weight:800;font-size:16px;margin-bottom:6px;">Product One</div>
-        <div style="color:rgba(255,255,255,.65);font-size:13px;line-height:1.5;">
-          Short summary for quick buyers.
-        </div>
+  <div style="font-weight:700;margin-bottom:10px;">Notes</div>
+  <div class="sub" style="margin-bottom:0;">
+    Don’t put keys or private delivery info in the website code.
+  </div>
+</div>
 
-        <div class="price">$10</div>
-        <div class="note">Replace the Buy Now link with your real checkout URL.</div>
+<aside class="side">
+  <div class="thumb"></div>
+  <div style="font-weight:800;font-size:16px;margin-bottom:6px;">Product One</div>
+  <div style="color:rgba(255,255,255,.65);font-size:13px;line-height:1.5;">Short summary.</div>
 
-        <div class="btnrow">
-          <a class="btn" href="#" target="_blank" rel="noopener">Buy Now →</a>
-          <a class="btn" href="products.html">← Back to Products</a>
-        </div>
-      </aside>
-    </div>
-  </section>
+  <div class="price">$10</div>
+
+  <div class="btnrow">
+    <a class="btn" href="#" target="_blank">Buy Now →</a>
+    <a class="btn" href="products.html">← Back</a>
+  </div>
+</aside>
+
+</div>
+</section>
 </main>
 
 </body>
