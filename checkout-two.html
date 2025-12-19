@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Checkout • Product Two • oqe8</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{--white:#fff;--muted:rgba(255,255,255,.6);}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+body{color:var(--white);min-height:100vh;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+.bg{
+  position:fixed; inset:0; z-index:-3; pointer-events:none;
+  background-image:url("oqe.png"), url("oqebg.png");
+  background-repeat:no-repeat,no-repeat;
+  background-position:center,center;
+  background-size:min(620px,75vmin),cover;
+  filter: blur(6px) saturate(1.05);
+  transform: scale(1.05);
+}
+.bg::after{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(circle at center, rgba(0,0,0,.25) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.8) 100%);
+}
+
+.nav{
+  position:fixed; top:0;left:0;right:0;
+  height:64px; padding:0 28px;
+  background:rgba(5,5,5,.85);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(10px);
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center; z-index:50;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;}
+.brand-badge{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:grid;place-items:center;}
+.nav-center{display:flex;justify-content:center;}
+.bubble-nav{
+  display:flex; gap:22px; padding:14px 18px;
+  width:33vw; max-width:560px; min-width:360px;
+  justify-content:center; border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(10px);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+.bubble-item{padding:10px 18px;border-radius:999px;background:rgba(0,0,0,.35);font-size:13px;transition:.2s;}
+.bubble-item:hover{background:rgba(255,255,255,.1);}
+
+.wrap{padding-top:64px;padding-bottom:40px;}
+.page{padding:44px 18px 80px;}
+.layout{
+  width:min(1100px, 96vw);
+  margin:0 auto;
+  display:flex;
+  gap:22px;
+  justify-content:center;
+  flex-wrap:wrap;
+  align-items:flex-start;
+}
+
+.panel{
+  flex:1 1 640px;
+  min-width:min(640px, 96vw);
+  padding:22px;
+  border-radius:18px;
+  background:rgba(15,15,20,.62);
+  border:1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(14px);
+  box-shadow:0 18px 50px rgba(0,0,0,.55);
+  text-align:left;
+}
+.side{
+  flex:0 1 360px;
+  min-width:min(360px, 96vw);
+  padding:18px;
+  border-radius:18px;
+  background:rgba(15,15,20,.62);
+  border:1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(14px);
+  box-shadow:0 18px 50px rgba(0,0,0,.55);
+  text-align:left;
+}
+
+.h1{font-size:34px;font-weight:800;margin-bottom:8px;}
+.sub{color:var(--muted);margin-bottom:14px;line-height:1.6;}
+.line{height:1px;background:rgba(255,255,255,.10);margin:16px 0;}
+
+.badge{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(0,0,0,.30);
+  border:1px solid rgba(255,255,255,.10);
+  font-size:12px;
+  color:rgba(255,255,255,.78);
+}
+
+.step{
+  margin-top:10px;
+  padding:14px;
+  border-radius:14px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+}
+.step-title{font-weight:800;margin-bottom:6px;}
+.step p{color:rgba(255,255,255,.75);font-size:14px;line-height:1.6;}
+
+.thumb{
+  height:160px;border-radius:14px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(130,90,255,.35), transparent 55%),
+    radial-gradient(circle at 70% 80%, rgba(70,160,255,.25), transparent 55%),
+    rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  margin-bottom:14px;
+}
+
+.price{font-weight:900;font-size:24px;margin-top:8px;}
+.small{color:rgba(255,255,255,.65);font-size:12px;line-height:1.5;margin-top:8px;}
+
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.btn{
+  display:inline-block;
+  padding:12px 14px;
+  border-radius:12px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.10);
+  transition:.2s;
+}
+.btn:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.18);}
+
+.paybtn{
+  display:inline-block;
+  width:100%;
+  text-align:center;
+  padding:14px 14px;
+  border-radius:14px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  font-weight:800;
+  transition:.2s;
+}
+.paybtn:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.20);}
+
+.scroll-space{height:120px;}
+
+@media(max-width:820px){
+  .bubble-nav{display:none;}
+  .panel,.side{flex-basis:100%;min-width:0;}
+  .scroll-space{height:80px;}
+}
+</style>
+</head>
+
+<body>
+<div class="bg"></div>
+
+<header class="nav">
+  <div class="brand">
+    <div class="brand-badge">⦿</div>
+    <div>oqe8.cc</div>
+  </div>
+
+  <div class="nav-center">
+    <nav class="bubble-nav">
+      <a class="bubble-item" href="index.html">Home</a>
+      <a class="bubble-item" href="products.html">Products</a>
+      <a class="bubble-item" href="index.html#reviews">Reviews</a>
+    </nav>
+  </div>
+
+  <div></div>
+</header>
+
+<main class="wrap">
+  <section class="page">
+    <div class="layout">
+
+      <div class="panel">
+        <div class="badge">Checkout</div>
+        <div class="h1" style="margin-top:10px;">Product Two</div>
+        <div class="sub">You’re about to purchase <strong>Product Two</strong>. After payment, you’ll receive delivery instructions for your key + configuration.</div>
+
+        <div class="line"></div>
+
+        <div class="step">
+          <div class="step-title">Step 1 — Pay</div>
+          <p>Click the payment button on the right. (We’ll add your real Stripe/PayPal/Cash App link after you choose what you want.)</p>
+        </div>
+
+        <div class="step">
+          <div class="step-title">Step 2 — Delivery</div>
+          <p>After payment, you’ll be told exactly how to receive your key and configuration. <strong>Do not expect the key to ever appear on this website page.</strong></p>
+        </div>
+
+        <div class="step">
+          <div class="step-title">Important</div>
+          <p>Digital product. <strong>All sales are final — no refunds</strong> except where required by law. See the Refund Policy for details.</p>
+        </div>
+
+        <div class="btnrow">
+          <a class="btn" href="product-two.html">← Back to Product</a>
+          <a class="btn" href="refund.html">View Refund Policy</a>
+          <a class="btn" href="terms.html">View Terms</a>
+          <a class="btn" href="privacy.html">View Privacy</a>
+        </div>
+      </div>
+
+      <aside class="side">
+        <div class="thumb"></div>
+        <div style="font-weight:900;font-size:16px;">Product Two</div>
+        <div class="small">Digital key + configuration</div>
+        <div class="price">$12</div>
+
+        <div class="line"></div>
+
+        <!-- Replace the href later with your real checkout link -->
+        <a class="paybtn" href="#" onclick="alert('No payment link set yet. Tell me if you want Stripe, PayPal, or Cash App and I will wire it in.'); return false;">
+          Pay Now →
+        </a>
+
+        <div class="small">
+          Support (Discord): <strong>oqe8</strong>
+        </div>
+      </aside>
+
+    </div>
+
+    <div class="scroll-space"></div>
+  </section>
+</main>
+
+</body>
+</html>
