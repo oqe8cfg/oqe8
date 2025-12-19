@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Refund Policy • oqe8</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{--white:#fff;--muted:rgba(255,255,255,.6);}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+body{color:var(--white);min-height:100vh;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+.bg{
+  position:fixed; inset:0; z-index:-3; pointer-events:none;
+  background-image:url("oqe.png"), url("oqebg.png");
+  background-repeat:no-repeat,no-repeat;
+  background-position:center,center;
+  background-size:min(620px,75vmin),cover;
+  filter: blur(6px) saturate(1.05);
+  transform: scale(1.05);
+}
+.bg::after{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(circle at center, rgba(0,0,0,.25) 0%, rgba(0,0,0,.55) 60%, rgba(0,0,0,.8) 100%);
+}
+
+/* NAVBAR */
+.nav{
+  position:fixed; top:0;left:0;right:0;
+  height:64px; padding:0 28px;
+  background:rgba(5,5,5,.85);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(10px);
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center; z-index:50;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;}
+.brand-badge{
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.15);
+  display:grid;place-items:center;
+}
+.nav-center{display:flex;justify-content:center;}
+.bubble-nav{
+  display:flex; gap:22px; padding:14px 18px;
+  width:33vw; max-width:560px; min-width:360px;
+  justify-content:center; border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(10px);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+.bubble-item{
+  padding:10px 18px;
+  border-radius:999px;
+  background:rgba(0,0,0,.35);
+  font-size:13px;
+  transition:.2s;
+}
+.bubble-item:hover{background:rgba(255,255,255,.1);}
+
+/* PAGE */
+.wrap{padding-top:64px;padding-bottom:40px;}
+.page{
+  max-width:980px;
+  margin:0 auto;
+  padding:40px 18px 70px;
+}
+.panel{
+  padding:26px;
+  border-radius:18px;
+  background:rgba(15,15,20,.62);
+  border:1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(14px);
+  box-shadow:0 18px 50px rgba(0,0,0,.55);
+}
+h1{font-size:34px;margin-bottom:8px;}
+.meta{color:rgba(255,255,255,.65);font-size:13px;margin-bottom:18px;}
+h2{font-size:16px;margin-top:18px;margin-bottom:8px;}
+p,li{color:rgba(255,255,255,.78);line-height:1.7;font-size:14px;}
+ul{padding-left:18px;margin-top:8px;}
+hr{border:0;height:1px;background:rgba(255,255,255,.10);margin:18px 0;}
+strong{color:#fff;}
+
+@media(max-width:820px){
+  .bubble-nav{display:none;}
+}
+</style>
+</head>
+
+<body>
+<div class="bg"></div>
+
+<header class="nav">
+  <div class="brand">
+    <div class="brand-badge">⦿</div>
+    <div>oqe8.cc</div>
+  </div>
+
+  <div class="nav-center">
+    <nav class="bubble-nav">
+      <a class="bubble-item" href="index.html">Home</a>
+      <a class="bubble-item" href="products.html">Products</a>
+      <a class="bubble-item" href="index.html#reviews">Reviews</a>
+    </nav>
+  </div>
+
+  <div></div>
+</header>
+
+<main class="wrap">
+  <section class="page">
+    <div class="panel">
+      <h1>Refund Policy</h1>
+      <div class="meta">Effective Date: September 2025</div>
+      <hr />
+
+      <p>
+        Because we sell <strong>digital products</strong> (including license keys and configuration files)
+        delivered electronically, <strong>ALL SALES ARE FINAL — NO REFUNDS</strong>, except where required by applicable law.
+      </p>
+
+      <h2>1. No Refunds for Digital Products</h2>
+      <p>
+        Once a digital product is delivered, it cannot be returned. As a result,
+        <strong>we do not offer refunds</strong> for:
+      </p>
+      <ul>
+        <li>change of mind or accidental purchase</li>
+        <li>user error or misunderstanding</li>
+        <li>incompatibility with your system or software</li>
+        <li>failure to read the product description</li>
+        <li>unauthorized sharing or misuse of the product</li>
+      </ul>
+
+      <h2>2. Replacement for Verified Issues</h2>
+      <p>
+        If your purchase is <strong>defective or inaccessible due to an error on our end</strong>,
+        you must contact us within <strong>24 hours of purchase</strong> with proof of purchase.
+      </p>
+      <p>
+        If the issue is verified, we may, at our discretion:
+      </p>
+      <ul>
+        <li>replace the digital key or configuration, or</li>
+        <li>re-deliver the product</li>
+      </ul>
+      <p>
+        Replacements are provided instead of refunds whenever possible.
+      </p>
+
+      <h2>3. Fraud & Chargebacks</h2>
+      <p>
+        Attempting to obtain a product and then initiating an unauthorized chargeback,
+        payment dispute, or fraudulent claim violates this policy.
+      </p>
+      <p>
+        Confirmed abuse may result in revoked access, denial of future purchases,
+        and reporting to the payment provider when appropriate.
+      </p>
+
+      <h2>4. Contact</h2>
+      <p>
+        Refund and replacement requests are handled through Discord:
+        <strong>oqe8</strong>
+      </p>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>
