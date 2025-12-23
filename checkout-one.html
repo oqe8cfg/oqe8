@@ -302,19 +302,19 @@ a{text-decoration:none;color:inherit}
 
       <div class="form">
         <div class="label">Email Address <span style="color:rgba(255,255,255,.55)">*</span></div>
-        <input class="input" type="email" placeholder="you@example.com" />
+        <input class="input" id="email" type="email" placeholder="you@example.com" />
 
         <div class="label">Coupon Code</div>
         <div class="row">
-          <input class="input" type="text" placeholder="Enter a coupon code (optional)" />
-          <button class="apply" type="button">Apply →</button>
+          <input class="input" id="coupon" type="text" placeholder="Enter a coupon code (optional)" />
+          <button class="apply" type="button" onclick="applyCoupon()">Apply →</button>
         </div>
 
         <div class="label">Payment Method <span style="color:rgba(255,255,255,.55)">*</span></div>
 
         <div class="pm">
           <label>
-            <input type="radio" name="pm" checked />
+            <input type="radio" name="pm" value="stripe" checked />
             <div>
               <div style="font-weight:900">Card (Stripe)</div>
               <small>Stripe charges a processing fee (deducted from seller payout).</small>
@@ -323,7 +323,7 @@ a{text-decoration:none;color:inherit}
           </label>
 
           <label>
-            <input type="radio" name="pm" />
+            <input type="radio" name="pm" value="paypal" />
             <div>
               <div style="font-weight:900">PayPal</div>
               <small>PayPal charges a processing fee (deducted from seller payout).</small>
@@ -332,7 +332,7 @@ a{text-decoration:none;color:inherit}
           </label>
 
           <label>
-            <input type="radio" name="pm" />
+            <input type="radio" name="pm" value="cashapp" />
             <div>
               <div style="font-weight:900">Cash App</div>
               <small>Cash App transfers may include fees depending on account/transfer type.</small>
@@ -360,13 +360,64 @@ a{text-decoration:none;color:inherit}
 </main>
 
 <script>
+/*
+  ✅ Stripe Payment Link wired:
+  - When "Card (Stripe)" is selected and user clicks Proceed:
+    -> redirects to your Stripe Payment Link (works immediately)
+  Notes:
+  - Email field on THIS page cannot be automatically passed into Stripe Payment Links unless
+    you use Stripe Checkout Sessions (server) or specific Stripe features; this page just redirects.
+*/
+const LINKS = {
+  stripe: "https://buy.stripe.com/cNi4gz6I4fB07vW3mdbwk00",
+  paypal: "",   // add your PayPal link here later
+  cashapp: ""   // add your Cash App link here later
+};
+
+function selectedMethod(){
+  const el = document.querySelector('input[name="pm"]:checked');
+  return el ? el.value : null;
+}
+
+function applyCoupon(){
+  // Placeholder for your future coupon logic (client-side coupons are not secure).
+  // Leave as a UI-only feature unless you validate server-side.
+  const code = (document.getElementById("coupon").value || "").trim();
+  if(!code){
+    alert("Enter a coupon code first.");
+    return;
+  }
+  alert("Coupon codes aren’t active yet on this page. If you want coupons, I’ll wire it via Stripe (recommended).");
+}
+
 function proceed(){
   const agree = document.getElementById("agree");
   if(!agree.checked){
     alert("Please agree to the Terms of Service to continue.");
     return;
   }
-  alert("Next: we’ll wire this button to your Stripe/PayPal/Cash App links based on selection.");
+
+  const method = selectedMethod();
+  if(!method){
+    alert("Please select a payment method.");
+    return;
+  }
+
+  const link = LINKS[method];
+
+  if(method === "stripe"){
+    // ✅ Redirect to Stripe Payment Link
+    window.location.href = link;
+    return;
+  }
+
+  // For other methods, you can add links and enable these later
+  if(!link){
+    alert("That payment method isn’t set up yet. Please choose Card (Stripe) for now.");
+    return;
+  }
+
+  window.location.href = link;
 }
 </script>
 
