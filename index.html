@@ -32,19 +32,32 @@ body{
 a{text-decoration:none;color:inherit}
 
 /* =========================
-   BACKGROUND
+   BACKGROUND (FULL + LOGO)
    ========================= */
 .bg{
   position:fixed;
   inset:0;
   z-index:-3;
   pointer-events:none;
-  background-image:url("oqe.png"),url("oqebg.png");
-  background-repeat:no-repeat,no-repeat;
-  background-position:center,center;
-  background-size:min(620px,75vmin),cover;
+
+  background-image:
+    url("oqe.png"),
+    url("oqebg.png");
+
+  background-repeat:
+    no-repeat,
+    no-repeat;
+
+  background-position:
+    center,
+    center;
+
+  background-size:
+    min(620px, 75vmin),
+    cover;
 }
 
+/* subtle dark vignette */
 .bg::after{
   content:"";
   position:absolute;
@@ -67,7 +80,7 @@ a{text-decoration:none;color:inherit}
   padding:0 28px;
   background:rgba(5,5,5,.85);
   border-bottom:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(10px);
+  backdrop-filter: blur(10px);
   display:grid;
   grid-template-columns:1fr auto 1fr;
   align-items:center;
@@ -90,6 +103,12 @@ a{text-decoration:none;color:inherit}
   place-items:center;
 }
 
+.brand small{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+}
+
 .nav-center{
   display:flex;
   justify-content:center;
@@ -106,7 +125,8 @@ a{text-decoration:none;color:inherit}
   border-radius:999px;
   background:rgba(255,255,255,.12);
   border:1px solid rgba(255,255,255,.18);
-  backdrop-filter:blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
 .bubble-item{
@@ -134,6 +154,11 @@ a{text-decoration:none;color:inherit}
   text-align:center;
 }
 
+.hero-inner{
+  max-width:860px;
+  padding:20px;
+}
+
 .title{
   font-size:54px;
   margin-bottom:12px;
@@ -144,8 +169,43 @@ a{text-decoration:none;color:inherit}
   margin-bottom:26px;
 }
 
+/* SEARCH */
+.searchRow{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.search{
+  width:min(560px,92vw);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 14px;
+  background:rgba(0,0,0,.4);
+  border-radius:12px;
+}
+
+.search input{
+  width:100%;
+  background:transparent;
+  border:0;
+  outline:0;
+  color:white;
+}
+
+.primary{
+  padding:12px 20px;
+  border-radius:12px;
+  background:rgba(255,255,255,.08);
+  border:0;
+  color:white;
+  cursor:pointer;
+}
+
 /* =========================
-   SOCIAL BAR
+   SOCIAL ICON STRIP
    ========================= */
 .social-wrap{
   margin-top:22px;
@@ -160,7 +220,7 @@ a{text-decoration:none;color:inherit}
   padding:14px 18px;
   border-radius:18px;
   background:rgba(20,20,25,.55);
-  backdrop-filter:blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .social-bar::before{
@@ -171,11 +231,11 @@ a{text-decoration:none;color:inherit}
   background:
     radial-gradient(900px 200px at 30% 50%, rgba(130,90,255,.45), transparent 60%),
     radial-gradient(900px 200px at 70% 50%, rgba(70,160,255,.35), transparent 60%);
-  filter:blur(18px);
+  filter: blur(18px);
   z-index:-1;
 }
 
-/* 🔥 FULL BLACK OUTLINE ON ALL ICONS */
+/* ✅ FULL BLACK OUTLINE ON ALL ICON BUTTONS */
 .social-btn{
   width:52px;
   height:52px;
@@ -196,8 +256,8 @@ a{text-decoration:none;color:inherit}
   transform:translateY(-2px);
   border-color:rgba(0,0,0,1);
   box-shadow:
-    0 0 24px rgba(120,100,255,.35),
-    0 0 32px rgba(70,160,255,.25);
+    0 0 24px rgba(120,100,255,.4),
+    0 0 32px rgba(70,160,255,.3);
 }
 
 .social-img{
@@ -206,9 +266,7 @@ a{text-decoration:none;color:inherit}
   object-fit:contain;
 }
 
-/* =========================
-   DISCORD MENU
-   ========================= */
+/* DISCORD MENU */
 .discord-wrap{position:relative}
 
 .discord-menu{
@@ -217,15 +275,11 @@ a{text-decoration:none;color:inherit}
   left:50%;
   transform:translateX(-50%);
   background:rgba(20,20,25,.95);
-  backdrop-filter:blur(10px);
+  backdrop-filter: blur(10px);
   border-radius:14px;
   box-shadow:0 18px 40px rgba(0,0,0,.55);
   display:none;
   min-width:180px;
-}
-
-.discord-wrap.open .discord-menu{
-  display:block;
 }
 
 .discord-menu a{
@@ -238,6 +292,16 @@ a{text-decoration:none;color:inherit}
   background:rgba(255,255,255,.08);
 }
 
+/* ✅ open state (click toggles this) */
+.discord-wrap.open .discord-menu{
+  display:block;
+}
+
+/* ❌ remove hover-open behavior */
+.discord-wrap:hover .discord-menu{
+  display:none;
+}
+
 @media(max-width:820px){
   .bubble-nav{display:none}
   .title{font-size:40px}
@@ -247,12 +311,13 @@ a{text-decoration:none;color:inherit}
 
 <body>
 
+<!-- BACKGROUND -->
 <div class="bg"></div>
 
 <header class="nav">
   <div class="brand">
     <div class="brand-badge">⦿</div>
-    <div>oqe8.cc</div>
+    <div>oqe8.cc <small></small></div>
   </div>
 
   <div class="nav-center">
@@ -262,38 +327,49 @@ a{text-decoration:none;color:inherit}
       <a class="bubble-item" href="#reviews">Reviews</a>
     </nav>
   </div>
+
+  <div></div>
 </header>
 
 <main class="wrap" id="home">
 <section class="hero">
-<div>
+<div class="hero-inner">
 
 <h1 class="title">Welcome to oqe8.cc</h1>
 <p class="subtitle">View the socials!</p>
 
+<div class="searchRow">
+  <div class="search">
+    <input placeholder="Search products...">
+  </div>
+
+  <!-- ✅ This now links to products.html -->
+  <a class="primary" href="products.html">View Products →</a>
+</div>
+
 <div class="social-wrap">
 <div class="social-bar">
 
-<a class="social-btn" href="https://www.youtube.com/@oqe8" target="_blank">
-  <img src="youtube.png" class="social-img">
+<a class="social-btn" href="https://www.youtube.com/@oqe8" target="_blank" rel="noopener">
+  <img src="youtube.png" class="social-img" alt="YouTube">
 </a>
 
-<a class="social-btn" href="https://www.roblox.com/users/1596488465/profile" target="_blank">
-  <img src="roblox.png" class="social-img">
+<a class="social-btn" href="https://www.roblox.com/users/1596488465/profile" target="_blank" rel="noopener">
+  <img src="roblox.png" class="social-img" alt="Roblox">
 </a>
 
-<a class="social-btn" href="https://tiktok.com/@YOURUSERNAME" target="_blank">
-  <img src="tiktok.png" class="social-img">
+<a class="social-btn" href="https://tiktok.com/@YOURUSERNAME" target="_blank" rel="noopener">
+  <img src="tiktok.png" class="social-img" alt="TikTok">
 </a>
 
 <div class="discord-wrap" id="discordWrap">
-  <button class="social-btn" id="discordToggle" type="button">
-    <img src="discord.png" class="social-img">
+  <button class="social-btn" id="discordToggle" type="button" aria-label="Discord" aria-haspopup="true" aria-expanded="false">
+    <img src="discord.png" class="social-img" alt="Discord">
   </button>
 
-  <div class="discord-menu">
-    <a href="https://discord.com/users/oqe8" target="_blank">Personal Discord</a>
-    <a href="https://discord.gg/gvFRVBUUUK" target="_blank">Discord Server</a>
+  <div class="discord-menu" id="discordMenu">
+    <a href="https://discord.com/users/oqe8" target="_blank" rel="noopener">Personal Discord</a>
+    <a href="https://discord.gg/gvFRVBUUUK" target="_blank" rel="noopener">Discord Server</a>
   </div>
 </div>
 
@@ -305,17 +381,39 @@ a{text-decoration:none;color:inherit}
 </main>
 
 <script>
-(function(){
-  const wrap=document.getElementById("discordWrap");
-  const toggle=document.getElementById("discordToggle");
+  // Toggle discord menu on click, and close when clicking outside
+  (function () {
+    const wrap = document.getElementById('discordWrap');
+    const toggle = document.getElementById('discordToggle');
 
-  toggle.addEventListener("click",e=>{
-    e.stopPropagation();
-    wrap.classList.toggle("open");
-  });
+    if (!wrap || !toggle) return;
 
-  document.addEventListener("click",()=>wrap.classList.remove("open"));
-})();
+    function setOpen(isOpen) {
+      wrap.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(!wrap.classList.contains('open'));
+    });
+
+    // Clicking inside the wrap/menu shouldn't close it
+    wrap.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+
+    // Click anywhere else closes it
+    document.addEventListener('click', function () {
+      setOpen(false);
+    });
+
+    // ESC closes it
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  })();
 </script>
 
 </body>
