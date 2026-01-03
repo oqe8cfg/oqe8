@@ -1,759 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>oqe8</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>oqe8</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
-<style>
-:root{
-  --white:#fff;
-  --muted:rgba(255,255,255,.6);
-}
+  <style>
+    :root{
+      --white:#fff;
+      --muted:rgba(255,255,255,.6);
+    }
 
-/* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-}
+    /* RESET */
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
 
-body{
-  color:var(--white);
-  min-height:100vh;
-  overflow-x:hidden;
-}
+    body{
+      color:var(--white);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
 
-a{text-decoration:none;color:inherit}
+    a{ text-decoration:none; color:inherit }
 
-/* =========================
-   BACKGROUND (FULL + LOGO)
-   ========================= */
-.bg{
-  position:fixed;
-  inset:0;
-  z-index:-3;
-  pointer-events:none;
+    /* =========================
+       BACKGROUND (FULL + LOGO)
+       ========================= */
+    .bg{
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      pointer-events:none;
 
-  background-image:
-    url("oqe.png"),
-    url("oqebg.png");
+      background-image:
+        url("oqe.png"),
+        url("oqebg.png");
 
-  background-repeat:
-    no-repeat,
-    no-repeat;
+      background-repeat:
+        no-repeat,
+        no-repeat;
 
-  background-position:
-    center,
-    center;
+      background-position:
+        center,
+        center;
 
-  background-size:
-    min(620px, 75vmin),
-    cover;
-}
+      background-size:
+        min(620px, 75vmin),
+        cover;
+    }
 
-/* subtle dark vignette */
-.bg::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(
-    circle at center,
-    rgba(0,0,0,.25) 0%,
-    rgba(0,0,0,.55) 60%,
-    rgba(0,0,0,.8) 100%
-  );
-}
+    /* subtle dark vignette */
+    .bg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(
+        circle at center,
+        rgba(0,0,0,.25) 0%,
+        rgba(0,0,0,.55) 60%,
+        rgba(0,0,0,.8) 100%
+      );
+    }
 
-/* =========================
-   NAVBAR
-   ========================= */
-.nav{
-  position:fixed;
-  top:0;left:0;right:0;
-  height:64px;
-  padding:0 28px;
-  background:rgba(5,5,5,.85);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  backdrop-filter: blur(10px);
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  z-index:50;
-}
+    /* =========================
+       NAVBAR
+       ========================= */
+    .nav{
+      position:fixed;
+      top:0;left:0;right:0;
+      height:64px;
+      padding:0 28px;
+      background:rgba(5,5,5,.85);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      z-index:50;
+    }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:700;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+    }
 
-.brand-badge{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.15);
-  display:grid;
-  place-items:center;
-}
+    .brand-badge{
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.15);
+      display:grid;
+      place-items:center;
+    }
 
-.brand small{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
-}
+    .brand small{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+    }
 
-.nav-center{
-  display:flex;
-  justify-content:center;
-}
+    .nav-center{
+      display:flex;
+      justify-content:center;
+    }
 
-.bubble-nav{
-  display:flex;
-  gap:22px;
-  padding:14px 18px;
-  width:33vw;
-  max-width:560px;
-  min-width:360px;
-  justify-content:center;
-  border-radius:999px;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.18);
-  backdrop-filter: blur(10px);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-}
+    .bubble-nav{
+      display:flex;
+      gap:22px;
+      padding:14px 18px;
+      width:33vw;
+      max-width:560px;
+      min-width:360px;
+      justify-content:center;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
 
-.bubble-item{
-  padding:10px 18px;
-  border-radius:999px;
-  background:rgba(0,0,0,.35);
-  font-size:13px;
-  transition:.2s;
-}
+    .bubble-item{
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(0,0,0,.35);
+      font-size:13px;
+      transition:.2s;
+    }
 
-.bubble-item:hover{
-  background:rgba(255,255,255,.1);
-}
+    .bubble-item:hover{
+      background:rgba(255,255,255,.1);
+    }
 
-/* =========================
-   PAGE
-   ========================= */
-.wrap{padding-top:64px}
+    /* =========================
+       PAGE
+       ========================= */
+    .wrap{ padding-top:64px; }
 
-.hero{
-  min-height:92vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
+    .hero{
+      min-height:92vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
 
-.hero-inner{
-  max-width:860px;
-  padding:20px;
-}
+    .hero-inner{
+      max-width:860px;
+      padding:20px;
+    }
 
-.title{
-  font-size:54px;
-  margin-bottom:12px;
-}
+    .title{
+      font-size:54px;
+      margin-bottom:12px;
+    }
 
-.subtitle{
-  color:var(--muted);
-  margin-bottom:26px;
-}
+    .subtitle{
+      color:var(--muted);
+      margin-bottom:26px;
+    }
 
-/* SEARCH */
-.searchRow{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
+    /* SEARCH */
+    .searchRow{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
 
-.search{
-  width:min(560px,92vw);
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:12px 14px;
-  background:rgba(0,0,0,.4);
-  border-radius:12px;
-}
+    .search{
+      width:min(560px,92vw);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      background:rgba(0,0,0,.4);
+      border-radius:12px;
+    }
 
-.search input{
-  width:100%;
-  background:transparent;
-  border:0;
-  outline:0;
-  color:white;
-}
+    .search input{
+      width:100%;
+      background:transparent;
+      border:0;
+      outline:0;
+      color:white;
+    }
 
-.primary{
-  padding:12px 20px;
-  border-radius:12px;
-  background:rgba(255,255,255,.08);
-  border:0;
-  color:white;
-  cursor:pointer;
-}
+    .primary{
+      padding:12px 20px;
+      border-radius:12px;
+      background:rgba(255,255,255,.08);
+      border:0;
+      color:white;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
 
-/* =========================
-   SOCIAL ICON STRIP
-   ========================= */
-.social-wrap{
-  margin-top:22px;
-  display:flex;
-  justify-content:center;
-}
+    /* =========================
+       SOCIAL ICON STRIP
+       ========================= */
+    .social-wrap{
+      margin-top:22px;
+      display:flex;
+      justify-content:center;
+    }
 
-.social-bar{
-  position:relative;
-  display:flex;
-  gap:18px;
-  padding:14px 18px;
-  border-radius:18px;
-  background:rgba(20,20,25,.55);
-  backdrop-filter: blur(10px);
-}
+    .social-bar{
+      position:relative;
+      display:flex;
+      gap:18px;
+      padding:14px 18px;
+      border-radius:18px;
+      background:rgba(20,20,25,.55);
+      backdrop-filter: blur(10px);
+    }
 
-.social-bar::before{
-  content:"";
-  position:absolute;
-  inset:-12px -20px;
-  border-radius:28px;
-  background:
-    radial-gradient(900px 200px at 30% 50%, rgba(130,90,255,.45), transparent 60%),
-    radial-gradient(900px 200px at 70% 50%, rgba(70,160,255,.35), transparent 60%);
-  filter: blur(18px);
-  z-index:-1;
-}
+    .social-bar::before{
+      content:"";
+      position:absolute;
+      inset:-12px -20px;
+      border-radius:28px;
+      background:
+        radial-gradient(900px 200px at 30% 50%, rgba(130,90,255,.45), transparent 60%),
+        radial-gradient(900px 200px at 70% 50%, rgba(70,160,255,.35), transparent 60%);
+      filter: blur(18px);
+      z-index:-1;
+    }
 
-.social-btn{
-  width:52px;
-  height:52px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  background:rgba(255,255,255,.06);
-  transition:.2s;
-  border:0;
-}
+    /* ✅ FULL BLACK OUTLINE ON ALL ICON BUTTONS */
+    .social-btn{
+      width:52px;
+      height:52px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.06);
+      border:1.5px solid rgba(0,0,0,.9);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      padding:0;
+    }
 
-.social-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:
-    0 0 24px rgba(120,100,255,.4),
-    0 0 32px rgba(70,160,255,.3);
-}
+    .social-btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(0,0,0,1);
+      box-shadow:
+        0 0 24px rgba(120,100,255,.4),
+        0 0 32px rgba(70,160,255,.3);
+    }
 
-.social-img{
-  width:26px;
-  height:26px;
-  object-fit:contain;
-}
+    .social-img{
+      width:26px;
+      height:26px;
+      object-fit:contain;
+    }
 
-/* DISCORD MENU */
-.discord-wrap{position:relative}
+    /* DISCORD MENU */
+    .discord-wrap{ position:relative; }
 
-.discord-menu{
-  position:absolute;
-  top:60px;
-  left:50%;
-  transform:translateX(-50%);
-  background:rgba(20,20,25,.95);
-  backdrop-filter: blur(10px);
-  border-radius:14px;
-  box-shadow:0 18px 40px rgba(0,0,0,.55);
-  display:none;
-  min-width:180px;
-  overflow:hidden;
-}
+    .discord-menu{
+      position:absolute;
+      top:60px;
+      left:50%;
+      transform:translateX(-50%);
+      background:rgba(20,20,25,.95);
+      backdrop-filter: blur(10px);
+      border-radius:14px;
+      box-shadow:0 18px 40px rgba(0,0,0,.55);
+      display:none;
+      min-width:180px;
+      overflow:hidden;
+    }
 
-.discord-menu a{
-  display:block;
-  padding:10px 14px;
-  font-size:13px;
-}
+    .discord-menu a{
+      display:block;
+      padding:10px 14px;
+      font-size:13px;
+    }
 
-.discord-menu a:hover{
-  background:rgba(255,255,255,.08);
-}
+    .discord-menu a:hover{
+      background:rgba(255,255,255,.08);
+    }
 
-/* ✅ click-open state */
-.discord-wrap.open .discord-menu{
-  display:block;
-}
+    /* ✅ click-open state */
+    .discord-wrap.open .discord-menu{
+      display:block;
+    }
 
-/* (removed the old hover-open rule on purpose) */
-
-@media(max-width:820px){
-  .bubble-nav{display:none}
-  .title{font-size:40px}
-}
-</style>
+    @media(max-width:820px){
+      .bubble-nav{ display:none; }
+      .title{ font-size:40px; }
+    }
+  </style>
 </head>
 
 <body>
-
-<!-- BACKGROUND -->
-<div class="bg"></div>
-
-<header class="nav">
-  <div class="brand">
-    <div class="brand-badge">⦿</div>
-    <div>oqe8.cc <small></small></div>
-  </div>
-
-  <div class="nav-center">
-    <nav class="bubble-nav">
-      <a class="bubble-item" href="#home">Home</a>
-      <a class="bubble-item" href="products.html">Products</a>
-      <a class="bubble-item" href="#reviews">Reviews</a>
-    </nav>
-  </div>
-
-  <div></div>
-</header>
-
-<main class="wrap" id="home">
-<section class="hero">
-<div class="hero-inner">
-
-<h1 class="title">Welcome to oqe8.cc</h1>
-<p class="subtitle">View the socials!</p>
-
-<div class="searchRow">
-  <div class="search">
-    <input placeholder="Search products...">
-  </div>
-
-  <!-- ✅ This links to products.html -->
-  <a class="primary" href="products.html">View Products →</a>
-</div>
-
-<div class="social-wrap">
-<div class="social-bar">
-
-<a class="social-btn" href="https://www.youtube.com/@oqe8" target="_blank" rel="noopener">
-  <img src="youtube.png" class="social-img" alt="YouTube">
-</a>
-
-<a class="social-btn" href="https://www.roblox.com/users/1596488465/profile" target="_blank" rel="noopener">
-  <img src="roblox.png" class="social-img" alt="Roblox">
-</a>
-
-<a class="social-btn" href="https://tiktok.com/@YOURUSERNAME" target="_blank" rel="noopener">
-  <img src="tiktok.png" class="social-img" alt="TikTok">
-</a>
-
-<div class="discord-wrap" id="discordWrap">
-  <!-- use a button so it toggles reliably and doesn't navigate -->
-  <button class="social-btn" id="discordToggle" type="button" aria-label="Discord" aria-haspopup="true" aria-expanded="false">
-    <img src="discord.png" class="social-img" alt="Discord">
-  </button>
-
-  <div class="discord-menu" id="discordMenu">
-    <a href="https://discord.com/users/oqe8" target="_blank" rel="noopener">Personal Discord</a>
-    <a href="https://discord.gg/gvFRVBUUUK" target="_blank" rel="noopener">Discord Server</a>
-  </div>
-</div>
-
-</div>
-</div>
-
-</div>
-</section>
-</main>
-
-<script>
-  // Click the discord icon to toggle the menu.
-  // Click anywhere else (outside) to close it.
-  (function () {
-    const wrap = document.getElementById('discordWrap');
-    const toggle = document.getElementById('discordToggle');
-
-    if (!wrap || !toggle) return;
-
-    function setOpen(isOpen) {
-      wrap.classList.toggle('open', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    }
-
-    toggle.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      setOpen(!wrap.classList.contains('open'));
-    });
-
-    // Clicking inside the menu/wrap should not close it
-    wrap.addEventListener('click', function (e) {
-      e.stopPropagation();
-    });
-
-    // Clicking anywhere else closes it
-    document.addEventListener('click', function () {
-      setOpen(false);
-    });
-
-    // ESC closes it
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') setOpen(false);
-    });
-  })();
-</script>
-
-</body>
-</html>   NAVBAR
-   ========================= */
-.nav{
-  position:fixed;
-  top:0;left:0;right:0;
-  height:64px;
-  padding:0 28px;
-  background:rgba(5,5,5,.85);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  backdrop-filter: blur(10px);
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  z-index:50;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:700;
-}
-
-.brand-badge{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.15);
-  display:grid;
-  place-items:center;
-}
-
-.brand small{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
-}
-
-.nav-center{
-  display:flex;
-  justify-content:center;
-}
-
-.bubble-nav{
-  display:flex;
-  gap:22px;
-  padding:14px 18px;
-  width:33vw;
-  max-width:560px;
-  min-width:360px;
-  justify-content:center;
-  border-radius:999px;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.18);
-  backdrop-filter: blur(10px);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-}
-
-.bubble-item{
-  padding:10px 18px;
-  border-radius:999px;
-  background:rgba(0,0,0,.35);
-  font-size:13px;
-  transition:.2s;
-}
-
-.bubble-item:hover{
-  background:rgba(255,255,255,.1);
-}
-
-/* =========================
-   PAGE
-   ========================= */
-.wrap{padding-top:64px}
-
-.hero{
-  min-height:92vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-
-.hero-inner{
-  max-width:860px;
-  padding:20px;
-}
-
-.title{
-  font-size:54px;
-  margin-bottom:12px;
-}
-
-.subtitle{
-  color:var(--muted);
-  margin-bottom:26px;
-}
-
-/* SEARCH */
-.searchRow{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
-.search{
-  width:min(560px,92vw);
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:12px 14px;
-  background:rgba(0,0,0,.4);
-  border-radius:12px;
-}
-
-.search input{
-  width:100%;
-  background:transparent;
-  border:0;
-  outline:0;
-  color:white;
-}
-
-.primary{
-  padding:12px 20px;
-  border-radius:12px;
-  background:rgba(255,255,255,.08);
-  border:0;
-  color:white;
-  cursor:pointer;
-}
-
-/* =========================
-   SOCIAL ICON STRIP
-   ========================= */
-.social-wrap{
-  margin-top:22px;
-  display:flex;
-  justify-content:center;
-}
-
-.social-bar{
-  position:relative;
-  display:flex;
-  gap:18px;
-  padding:14px 18px;
-  border-radius:18px;
-  background:rgba(20,20,25,.55);
-  backdrop-filter: blur(10px);
-}
-
-.social-bar::before{
-  content:"";
-  position:absolute;
-  inset:-12px -20px;
-  border-radius:28px;
-  background:
-    radial-gradient(900px 200px at 30% 50%, rgba(130,90,255,.45), transparent 60%),
-    radial-gradient(900px 200px at 70% 50%, rgba(70,160,255,.35), transparent 60%);
-  filter: blur(18px);
-  z-index:-1;
-}
-
-/* ✅ FULL BLACK OUTLINE ON ALL ICON BUTTONS */
-.social-btn{
-  width:52px;
-  height:52px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  background:rgba(255,255,255,.06);
-
-  border:1.5px solid rgba(0,0,0,.9);
-
-  transition:
-    transform .2s,
-    box-shadow .2s,
-    border-color .2s;
-}
-
-.social-btn:hover{
-  transform:translateY(-2px);
-  border-color:rgba(0,0,0,1);
-  box-shadow:
-    0 0 24px rgba(120,100,255,.4),
-    0 0 32px rgba(70,160,255,.3);
-}
-
-.social-img{
-  width:26px;
-  height:26px;
-  object-fit:contain;
-}
-
-/* DISCORD MENU */
-.discord-wrap{position:relative}
-
-.discord-menu{
-  position:absolute;
-  top:60px;
-  left:50%;
-  transform:translateX(-50%);
-  background:rgba(20,20,25,.95);
-  backdrop-filter: blur(10px);
-  border-radius:14px;
-  box-shadow:0 18px 40px rgba(0,0,0,.55);
-  display:none;
-  min-width:180px;
-}
-
-.discord-menu a{
-  display:block;
-  padding:10px 14px;
-  font-size:13px;
-}
-
-.discord-menu a:hover{
-  background:rgba(255,255,255,.08);
-}
-
-/* ✅ open state (click toggles this) */
-.discord-wrap.open .discord-menu{
-  display:block;
-}
-
-/* ❌ remove hover-open behavior */
-.discord-wrap:hover .discord-menu{
-  display:none;
-}
-
-@media(max-width:820px){
-  .bubble-nav{display:none}
-  .title{font-size:40px}
-}
-</style>
-</head>
-
-<body>
-
-<!-- BACKGROUND -->
-<div class="bg"></div>
-
-<header class="nav">
-  <div class="brand">
-    <div class="brand-badge">⦿</div>
-    <div>oqe8.cc <small></small></div>
-  </div>
-
-  <div class="nav-center">
-    <nav class="bubble-nav">
-      <a class="bubble-item" href="#home">Home</a>
-      <a class="bubble-item" href="products.html">Products</a>
-      <a class="bubble-item" href="#reviews">Reviews</a>
-    </nav>
-  </div>
-
-  <div></div>
-</header>
-
-<main class="wrap" id="home">
-<section class="hero">
-<div class="hero-inner">
-
-<h1 class="title">Welcome to oqe8.cc</h1>
-<p class="subtitle">View the socials!</p>
-
-<div class="searchRow">
-  <div class="search">
-    <input placeholder="Search products...">
-  </div>
-
-  <!-- ✅ This now links to products.html -->
-  <a class="primary" href="products.html">View Products →</a>
-</div>
-
-<div class="social-wrap">
-<div class="social-bar">
-
-<a class="social-btn" href="https://www.youtube.com/@oqe8" target="_blank" rel="noopener">
-  <img src="youtube.png" class="social-img" alt="YouTube">
-</a>
-
-<a class="social-btn" href="https://www.roblox.com/users/1596488465/profile" target="_blank" rel="noopener">
-  <img src="roblox.png" class="social-img" alt="Roblox">
-</a>
-
-<a class="social-btn" href="https://tiktok.com/@YOURUSERNAME" target="_blank" rel="noopener">
-  <img src="tiktok.png" class="social-img" alt="TikTok">
-</a>
-
-<div class="discord-wrap" id="discordWrap">
-  <button class="social-btn" id="discordToggle" type="button" aria-label="Discord" aria-haspopup="true" aria-expanded="false">
-    <img src="discord.png" class="social-img" alt="Discord">
-  </button>
-
-  <div class="discord-menu" id="discordMenu">
-    <a href="https://discord.com/users/oqe8" target="_blank" rel="noopener">Personal Discord</a>
-    <a href="https://discord.gg/gvFRVBUUUK" target="_blank" rel="noopener">Discord Server</a>
-  </div>
-</div>
-
-</div>
-</div>
-
-</div>
-</section>
-</main>
-
-<script>
-  // Toggle discord menu on click, and close when clicking outside
-  (function () {
-    const wrap = document.getElementById('discordWrap');
-    const toggle = document.getElementById('discordToggle');
-
-    if (!wrap || !toggle) return;
-
-    function setOpen(isOpen) {
-      wrap.classList.toggle('open', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    }
-
-    toggle.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      setOpen(!wrap.classList.contains('open'));
-    });
-
-    // Clicking inside the wrap/menu shouldn't close it
-    wrap.addEventListener('click', function (e) {
-      e.stopPropagation();
-    });
-
-    // Click anywhere else closes it
-    document.addEventListener('click', function () {
-      setOpen(false);
-    });
-
-    // ESC closes it
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') setOpen(false);
-    });
-  })();
-</script>
-
+  <!-- BACKGROUND -->
+  <div class="bg"></div>
+
+  <header class="nav">
+    <div class="brand">
+      <div class="brand-badge">⦿</div>
+      <div>oqe8.cc <small></small></div>
+    </div>
+
+    <div class="nav-center">
+      <nav class="bubble-nav">
+        <a class="bubble-item" href="#home">Home</a>
+        <a class="bubble-item" href="products.html">Products</a>
+        <a class="bubble-item" href="#reviews">Reviews</a>
+      </nav>
+    </div>
+
+    <div></div>
+  </header>
+
+  <main class="wrap" id="home">
+    <section class="hero">
+      <div class="hero-inner">
+        <h1 class="title">Welcome to oqe8.cc</h1>
+        <p class="subtitle">View the socials!</p>
+
+        <div class="searchRow">
+          <div class="search">
+            <input placeholder="Search products..." />
+          </div>
+
+          <a class="primary" href="products.html">View Products →</a>
+        </div>
+
+        <div class="social-wrap">
+          <div class="social-bar">
+
+            <a class="social-btn" href="https://www.youtube.com/@oqe8" target="_blank" rel="noopener">
+              <img src="youtube.png" class="social-img" alt="YouTube" />
+            </a>
+
+            <a class="social-btn" href="https://www.roblox.com/users/1596488465/profile" target="_blank" rel="noopener">
+              <img src="roblox.png" class="social-img" alt="Roblox" />
+            </a>
+
+            <a class="social-btn" href="https://tiktok.com/@YOURUSERNAME" target="_blank" rel="noopener">
+              <img src="tiktok.png" class="social-img" alt="TikTok" />
+            </a>
+
+            <div class="discord-wrap" id="discordWrap">
+              <button class="social-btn" id="discordToggle" type="button" aria-label="Discord" aria-haspopup="true" aria-expanded="false">
+                <img src="discord.png" class="social-img" alt="Discord" />
+              </button>
+
+              <div class="discord-menu" id="discordMenu">
+                <a href="https://discord.com/users/oqe8" target="_blank" rel="noopener">Personal Discord</a>
+                <a href="https://discord.gg/gvFRVBUUUK" target="_blank" rel="noopener">Discord Server</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Click the discord icon to toggle the menu.
+    // Click anywhere else (outside) to close it.
+    (function () {
+      const wrap = document.getElementById('discordWrap');
+      const toggle = document.getElementById('discordToggle');
+
+      if (!wrap || !toggle) return;
+
+      function setOpen(isOpen) {
+        wrap.classList.toggle('open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      }
+
+      toggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen(!wrap.classList.contains('open'));
+      });
+
+      // Clicking inside the menu/wrap should not close it
+      wrap.addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
+
+      // Clicking anywhere else closes it
+      document.addEventListener('click', function () {
+        setOpen(false);
+      });
+
+      // ESC closes it
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    })();
+  </script>
 </body>
 </html>
